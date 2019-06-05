@@ -157,7 +157,7 @@ if __name__ == '__main__':
         './data', train=True, download=True, transform=transforms.ToTensor())
 
     ntrain = 20000
-    ntest = 20000
+    ntest = 1000
     train_data, test_data, _ = torch.utils.data.random_split(
         mnist_data, [ntrain, ntest, 60000-ntrain-ntest])
 
@@ -166,7 +166,7 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(
         test_data, batch_size=1, shuffle=False, num_workers=1)
 
-    T = 3
+    T = 5
     model = train_pytorch_1(T)
     # model = train_pytorch_2(T)
     # model = train_pytorch_3(T)

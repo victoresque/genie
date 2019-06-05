@@ -19,8 +19,8 @@ module ext_sram(
     assign W0_ready = W0_ready_r;
     assign R0_ready = R0_ready_r;
 
-    parameter RD_LATENCY = 2;
-    parameter WR_LATENCY = 2;
+    parameter RD_LATENCY = 8;
+    parameter WR_LATENCY = 8;
     integer rdcnt;
     integer wrcnt;
 
@@ -69,17 +69,25 @@ module ext_insn_rom(
 endmodule
 
 
-module sram4K (
+module sram_4K(
     input         clk,
     input   [9:0] addr,
-    input         wen,
+    input         en,
+    input         wmode,
     input  [31:0] wdata,
     output [31:0] rdata
 );
-    reg [31:0] ram [1023:0];
-    
-    assign rdata = ram[addr];
 
-    always @ (posedge clk)
-        if (wen) ram[addr] <= wdata;
+    reg        reg_ren;
+    reg  [9:0] reg_addr;
+    reg [31:0] ram[0:1023];
+
+    assign rdata = reg_ren ? ram[reg_addr] : 32'bx;
+
+    always @(posedge clk)
+        reg_ren <= en && !wmode;
+    always @(posedge clk)
+        if (en && !wmode) reg_addr <= addr;
+    always @(posedge clk)
+        if (en && wmode) ram[addr] <= wdata;
 endmodule

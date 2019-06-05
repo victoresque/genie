@@ -13,7 +13,6 @@
 * Output feature address base
 
 * DNN example
-```
 id    Type   Act        dim     addr   Bias     Baddr
 -----------------------------------------------------
 1   Linear  ReLU    784, 32        0     32     25088
@@ -21,21 +20,20 @@ id    Type   Act        dim     addr   Bias     Baddr
 3   Linear           32, 10    26176     10     26496  
 4       F0                     26506
 5       F1                     27290
-```
 
 * CNN example
-```
-id     Type   Act            dim     addr   Bias     Baddr
-----------------------------------------------------------
-1    Conv2d  ReLU    16, 1, 3, 3        0     16       144
-2      MP2d
-3    Conv2d  ReLU   32, 16, 3, 3      160     32      4768
-4      MP2d
-5    Conv2d  ReLU   64, 32, 3, 3     4800     64     23232
-6    Conv2d         10, 64, 3, 3    23296     10     29056
-7        F0                         29066
-8        F1
-```
+
+id     Type   Act            dim         addr      ofsize
+-----------------------------------------------------------
+0     Input               28, 28                      784
+1    Conv2d  ReLU    16, 1, 3, 3            0       10816
+2      MP2d                                          2704
+3    Conv2d  ReLU   32, 16, 3, 3          160        3872
+4      MP2d                                           800
+5    Conv2d  ReLU   16, 32, 3, 3         4800         576
+6    Linear              144, 10         9424          10
+7        F0                             10874
+8        F1                             21690
 
 * CNN w/ flatten example
 ```

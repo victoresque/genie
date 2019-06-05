@@ -1,0 +1,45 @@
+// conv 1
+    cfgl, conv, relu, bias
+    cfgcv, 1, 16, 3
+    cfgif, 28, 28
+    cvlif, 10874
+    cvlw, 0
+    cvsof, 21690
+    cvexec
+// max pooling 1
+    cfgl, mp, noact, nobias
+    cfgif, 26, 26
+    mplif, 21690
+    mpsof, 10874
+    mpexec
+// conv 2
+    cfgl, conv, relu, bias
+    cfgcv, 16, 32, 3
+    cfgif, 13, 13
+    cvlif, 10874
+    cvlw, 160
+    cvsof, 21690
+    cvexec
+// max pooling 2
+    cfgl, mp, noact, nobias
+    cfgif, 11, 11
+    mplif, 21690
+    mpsof, 10874
+    mpexec
+// conv 3
+    cfgl, conv, relu, bias
+    cfgcv, 32, 64, 3
+    cfgif, 5, 5
+    cvlif, 10874
+    cvlw, 4800
+    cvsof, 21690
+    cvexec
+// conv 3
+    cfgl, conv, relu, bias
+    cfgcv, 64, 10, 3
+    cfgif, 3, 3
+    cvlif, 21690
+    cvlw, 9424
+    cvsof, 10874
+    cvexec
+    eoc

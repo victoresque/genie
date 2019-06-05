@@ -1,3 +1,0 @@
-linear 784,32 relu bias
-linear 32,32 relu bias
-linear 32,10

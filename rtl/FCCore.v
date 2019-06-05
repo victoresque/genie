@@ -31,27 +31,29 @@ module FCCore (
     reg         of_wvalid_r, of_wvalid_w;
     wire [31:0] of_rdata;
 
-    sram4K sram_if_bias (
+    sram_4K sram_if_bias (
         .clk(clk),
-        .addr(if_addr_r),
-        .wdata(if_wdata_r),
-        .wen(if_wvalid_r),
+        .addr(if_addr_w),
+        .en(1'b1),
+        .wmode(if_wvalid_w),
+        .wdata(if_wdata_w),
         .rdata(if_rdata)
     );
 
-    sram4K sram_of (
+    sram_4K sram_of (
         .clk(clk),
-        .addr(of_addr_r),
-        .wdata(of_wdata_r),
-        .wen(of_wvalid_r),
+        .addr(of_addr_w),
+        .en(1'b1),
+        .wmode(of_wvalid_w),
+        .wdata(of_wdata_w),
         .rdata(of_rdata)
     );
 
     assign dout_valid = dout_valid_r;
 
     wire [15:0] sum = $signed(if_rdata[15:0]) + $signed(of_rdata[15:0]);
+    // TODO: move activation to upper level
     assign dout_data = sum[15] ? 0 : {16'b0, sum};
-
 
     reg  [31:0] MULT;
 

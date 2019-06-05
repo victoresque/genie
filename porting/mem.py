@@ -8,7 +8,7 @@ if __name__ == '__main__':
     model = np.load('model.npy')
     model = (model * 2**F).astype(np.int32)
 
-    print(model)
+    print(len(model))
     model[model < 0] += 2**16
     model = model.astype(np.uint16)
 
