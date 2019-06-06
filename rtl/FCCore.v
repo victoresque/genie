@@ -51,7 +51,7 @@ module FCCore (
 
     assign dout_valid = dout_valid_r;
 
-    wire [15:0] sum = $signed(if_rdata[15:0]) + $signed(of_rdata[15:0]);
+    wire [15:0] sum = $signed(has_bias ? if_rdata[15:0] : 0) + $signed(of_rdata[15:0]);
     // TODO: move activation to upper level
     assign dout_data = sum[15] ? 0 : {16'b0, sum};
 
@@ -94,8 +94,15 @@ module FCCore (
             S_READ_WEIGHT: begin
                 if (cnt_r == cin * cout) begin
                     cnt_w = 0;
-                    if_addr_w = -1;
-                    state_next = S_READ_BIAS;
+                    if (has_bias) begin
+                        if_addr_w = -1;
+                        state_next = S_READ_BIAS;
+                    end
+                    else begin
+                        if_addr_w = 0;
+                        of_addr_w = 0;
+                        state_next = S_WRITE_OUTPUT;
+                    end
                 end
                 else if (din_valid) begin
                     if (if_addr_r == cin - 1) begin

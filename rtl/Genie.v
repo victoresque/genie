@@ -41,15 +41,17 @@ module Genie (
     wire        rready_[0:3];
     wire [25:0] raddr_[0:3];
     wire [31:0] rdata_[0:3];
+    wire        is_fc;
+    assign is_fc = layer_type == `LAYER_FC;
 
     assign wvalid = wvalid_[layer_type[1:0]];
-    assign wready_[1] = wready & (layer_type == `LAYER_FC);
+    assign wready_[1] = wready & is_fc;
     assign waddr = waddr_[layer_type[1:0]];
     assign wdata = wdata_[layer_type[1:0]];
     assign rvalid = rvalid_[layer_type[1:0]];
-    assign rready_[1] = rready & (layer_type == `LAYER_FC);
+    assign rready_[1] = rready & is_fc;
     assign raddr = raddr_[layer_type[1:0]];
-    assign rdata_[1] = rdata & {32{layer_type == `LAYER_FC}};
+    assign rdata_[1] = rdata & {32{is_fc}};
 
     FCDataLoader u_FCDataLoader (
         .clk(clk),

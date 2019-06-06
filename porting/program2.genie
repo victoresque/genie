@@ -1,0 +1,6 @@
+cfgl, fc, relu, bias
+cfgfc, 144, 10
+fclif, 10874
+fclw, 0
+fcsof, 21690
+eoc

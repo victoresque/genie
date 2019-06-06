@@ -1,8 +1,8 @@
 `timescale 1ns/10ps
 `define CYCLE       10.0
 `define HCYCLE      (`CYCLE/2)
-`define END_CYCLE   10000000
-`define RST_DELAY   (2.5*`CYCLE)
+`define MAX_CYCLE   10000000
+`define RST_DELAY   (5.5*`CYCLE)
 
 
 module tb;
@@ -75,21 +75,16 @@ endmodule
 
 
 module Clkgen (
-    clk,
-    rst_n
+    output reg clk,
+    output reg rst_n
 );
-    output reg clk;
-    output reg rst_n;
-
     always # (`HCYCLE) clk = ~clk;
 
     initial begin
         clk = 1'b1;
-
         rst_n = 1; # (             0.25 * `CYCLE);
         rst_n = 0; # (`RST_DELAY - 0.25 * `CYCLE);
-        rst_n = 1; # (       `END_CYCLE * `CYCLE);
-
+        rst_n = 1; # (       `MAX_CYCLE * `CYCLE);
         $finish;
     end
 endmodule

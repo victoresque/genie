@@ -25,13 +25,13 @@ module Decoder (
     output [26:0] base_addr
 );
     reg   [5:0] state, state_next;
-    parameter S_INSN_DEC    = 0;
-    parameter S_CFGL        = 1;
-    parameter S_CFGFC       = 2;
-    parameter S_LIF         = 3;
-    parameter S_LW          = 4;
-    parameter S_SOF         = 5;
-    parameter S_EOC         = 31;
+    parameter S_INSN_DEC = 0;
+    parameter S_CFGL     = 1;
+    parameter S_CFGFC    = 2;
+    parameter S_LIF      = 3;
+    parameter S_LW       = 4;
+    parameter S_SOF      = 5;
+    parameter S_EOC      = 31;
 
     reg  [12:0] iaddr_r, iaddr_w;
     wire  [4:0] opcode;
@@ -47,13 +47,15 @@ module Decoder (
     assign act_type = layer_cfg_r[5:1];
     assign has_bias = layer_cfg_r[0];
 
+    wire        is_fc;
     reg  [21:0] fc_cfg_r, fc_cfg_w;
     wire [11:0] fc_cin;
     wire [11:0] fc_cout;
+    assign is_fc = layer_type == `LAYER_FC;
     assign fc_rst = state == S_CFGFC;
-    assign fc_lif_start = (layer_type == `LAYER_FC) && (state == S_LIF);
-    assign fc_lw_start = (layer_type == `LAYER_FC) && (state == S_LW);
-    assign fc_sof_start = (layer_type == `LAYER_FC) && (state == S_SOF);
+    assign fc_lif_start = is_fc & (state == S_LIF);
+    assign fc_lw_start = is_fc & (state == S_LW);
+    assign fc_sof_start = is_fc && (state == S_SOF);
     assign fc_cin = fc_cfg_r[21:11];
     assign fc_cout = fc_cfg_r[10:0];
 
@@ -104,17 +106,17 @@ module Decoder (
             state_next = S_INSN_DEC;
         end
         S_LIF: begin
-            if ((layer_type == `LAYER_FC) && fc_done) begin
+            if (is_fc & fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end
         S_LW: begin
-            if ((layer_type == `LAYER_FC) && fc_done) begin
+            if (is_fc & fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end
         S_SOF: begin
-            if ((layer_type == `LAYER_FC) && fc_done) begin
+            if (is_fc & fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end

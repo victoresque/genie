@@ -1,3 +1,4 @@
+import sys
 import torch
 import torchvision
 import numpy as np
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     img = img.astype(np.uint16)
 
     with open('../mem/din.mem', 'w') as f:
-        f.write('@{:x}\n'.format(26506))
+        f.write('@{:x}\n'.format(int(sys.argv[1])))
         for x in img:
             f.write('{:04x}\n'.format(x))
         f.write('@{:x}\n'.format(ext_mem_size-1))

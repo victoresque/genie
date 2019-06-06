@@ -1,0 +1,8 @@
+ifdim 1,28,28
+conv 1,16,3 relu bias
+maxpool
+conv 16,32,3 relu bias
+maxpool
+conv 32,16,3 relu bias
+flatten
+fc 144,10 relu bias

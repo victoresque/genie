@@ -70,33 +70,13 @@ def assemble(insn):
 
 
 if __name__ == '__main__':
-    program = [
-        ['cfgl', 'fc', 'relu', 'bias'],
-        ['cfgfc', '784', '32'],
-        ['fclif', '26506'],
-        ['fclw', '0'],
-        ['fcsof', '27290'],
-        ['cfgl', 'fc', 'relu', 'bias'],
-        ['cfgfc', '32', '32'],
-        ['fclif', '27290'],
-        ['fclw', '25120'],
-        ['fcsof', '26506'],
-        ['cfgl', 'fc', 'noact', 'bias'],
-        ['cfgfc', '32', '10'],
-        ['fclif', '26506'],
-        ['fclw', '26176'],
-        ['fcsof', '27290'],
-        ['eoc']
-    ]
-
-    # program = []
-
-    # with open('program.genie', 'r') as f:
-    #     for line in f:
-    #         if line[0] != '/':
-    #             line = line.split(',')
-    #             line = [x.strip() for x in line]
-    #             program.append(line)
+    program = []
+    with open('program.genie', 'r') as f:
+        for line in f:
+            if line[0] != '/':
+                line = line.split(',')
+                line = [x.strip() for x in line]
+                program.append(line)
 
     with open('../mem/insn.mem', 'w') as f:
         insn_mem_size = 8192

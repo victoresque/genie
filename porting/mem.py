@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 
 
@@ -5,7 +6,7 @@ if __name__ == '__main__':
     S, M, F = 1, 5, 10
     ext_mem_size = 67108864
 
-    model = np.load('model.npy')
+    model = np.load(sys.argv[1])
     model = (model * 2**F).astype(np.int32)
 
     print(len(model))

@@ -1,0 +1,4 @@
+fc 784,32 relu bias
+fc 32,64 relu bias
+fc 64,32 relu nobias
+fc 32,10 noact nobias
