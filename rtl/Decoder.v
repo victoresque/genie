@@ -28,9 +28,9 @@ module Decoder (
     parameter S_INSN_DEC = 0;
     parameter S_CFGL     = 1;
     parameter S_CFGFC    = 2;
-    parameter S_LIF      = 3;
-    parameter S_LW       = 4;
-    parameter S_SOF      = 5;
+    parameter S_FCLIF    = 3;
+    parameter S_FCLW     = 4;
+    parameter S_FCSOF    = 5;
     parameter S_EOC      = 31;
 
     reg  [12:0] iaddr_r, iaddr_w;
@@ -53,9 +53,9 @@ module Decoder (
     wire [11:0] fc_cout;
     assign is_fc = layer_type == `LAYER_FC;
     assign fc_rst = state == S_CFGFC;
-    assign fc_lif_start = is_fc & (state == S_LIF);
-    assign fc_lw_start = is_fc & (state == S_LW);
-    assign fc_sof_start = is_fc && (state == S_SOF);
+    assign fc_lif_start = state == S_FCLIF;
+    assign fc_lw_start = state == S_FCLW;
+    assign fc_sof_start = state == S_FCSOF;
     assign fc_cin = fc_cfg_r[21:11];
     assign fc_cout = fc_cfg_r[10:0];
 
@@ -75,26 +75,50 @@ module Decoder (
             case(opcode)
             `OP_CFGL: begin
                 layer_cfg_w = {idata[20:16], idata[9:5], idata[0]};
-                state_next = S_CFGL;
+                state_next = S_CFGL; 
             end
             `OP_CFGFC: begin
                 fc_cfg_w = {idata[26:16], idata[15:5]};
-                state_next = S_CFGFC;
+                state_next = S_CFGFC; 
             end
             `OP_FCLIF: begin
                 base_addr_w = idata[26:0];
-                state_next = S_LIF;
+                state_next = S_FCLIF; 
             end
             `OP_FCLW: begin
                 base_addr_w = idata[26:0];
-                state_next = S_LW;
+                state_next = S_FCLW; 
             end
             `OP_FCSOF: begin
                 base_addr_w = idata[26:0];
-                state_next = S_SOF;
+                state_next = S_FCSOF; 
+            end
+            `OP_CFGCV: begin
+            end
+            `OP_CFGCVIF: begin
+            end
+            `OP_CVAIF: begin
+            end
+            `OP_CVAW: begin
+            end
+            `OP_CVAOF: begin
+            end
+            `OP_CVSELPE: begin
+            end
+            `OP_CVCFGPE: begin
+            end
+            `OP_CVLIFP: begin
+            end
+            `OP_CVLWP: begin
+            end
+            `OP_CVSOFP: begin
+            end
+            `OP_MPLIF: begin
+            end
+            `OP_MPSOF: begin
             end
             `OP_EOC: begin
-                state_next = S_EOC;
+                state_next = S_EOC; 
             end
             endcase
             iaddr_w = iaddr_r + 1;
@@ -105,18 +129,18 @@ module Decoder (
         S_CFGFC: begin
             state_next = S_INSN_DEC;
         end
-        S_LIF: begin
-            if (is_fc & fc_done) begin
+        S_FCLIF: begin
+            if (fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end
-        S_LW: begin
-            if (is_fc & fc_done) begin
+        S_FCLW: begin
+            if (fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end
-        S_SOF: begin
-            if (is_fc & fc_done) begin
+        S_FCSOF: begin
+            if (fc_done) begin
                 state_next = S_INSN_DEC;
             end
         end

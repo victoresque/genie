@@ -1,0 +1,143 @@
+// conv
+cfgl, conv, relu, bias
+cfgcv, 1, 16, 3
+cfgcvif, 28, 28
+cvaif, 10874
+cvaw, 0
+cvaof, 21690
+cvselpe, 0
+cvcfgpe, 12, 10, 10
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 12, 10, 10
+cvlifp, 0, 10
+cvsofp, 0, 0, 10
+cvcfgpe, 12, 10, 6
+cvlifp, 0, 20
+cvsofp, 0, 0, 20
+cvcfgpe, 12, 10, 10
+cvlifp, 10, 0
+cvsofp, 0, 10, 0
+cvcfgpe, 12, 10, 10
+cvlifp, 10, 10
+cvsofp, 0, 10, 10
+cvcfgpe, 12, 10, 6
+cvlifp, 10, 20
+cvsofp, 0, 10, 20
+cvcfgpe, 12, 6, 10
+cvlifp, 20, 0
+cvsofp, 0, 20, 0
+cvcfgpe, 12, 6, 10
+cvlifp, 20, 10
+cvsofp, 0, 20, 10
+cvcfgpe, 12, 6, 6
+cvlifp, 20, 20
+cvsofp, 0, 20, 20
+cvcfgpe, 4, 10, 10
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+cvcfgpe, 4, 10, 10
+cvlifp, 0, 10
+cvsofp, 12, 0, 10
+cvcfgpe, 4, 10, 6
+cvlifp, 0, 20
+cvsofp, 12, 0, 20
+cvcfgpe, 4, 10, 10
+cvlifp, 10, 0
+cvsofp, 12, 10, 0
+cvcfgpe, 4, 10, 10
+cvlifp, 10, 10
+cvsofp, 12, 10, 10
+cvcfgpe, 4, 10, 6
+cvlifp, 10, 20
+cvsofp, 12, 10, 20
+cvcfgpe, 4, 6, 10
+cvlifp, 20, 0
+cvsofp, 12, 20, 0
+cvcfgpe, 4, 6, 10
+cvlifp, 20, 10
+cvsofp, 12, 20, 10
+cvcfgpe, 4, 6, 6
+cvlifp, 20, 20
+cvsofp, 12, 20, 20
+// maxpool
+cfgl, mp
+mplif, 21690
+mpsof, 10874
+// conv
+cfgl, conv, relu, bias
+cfgcv, 16, 32, 3
+cfgcvif, 13, 13
+cvaif, 10874
+cvaw, 0
+cvaof, 21690
+cvselpe, 0
+cvcfgpe, 12, 10, 10
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 12, 10, 1
+cvlifp, 0, 10
+cvsofp, 0, 0, 10
+cvcfgpe, 12, 1, 10
+cvlifp, 10, 0
+cvsofp, 0, 10, 0
+cvcfgpe, 12, 1, 1
+cvlifp, 10, 10
+cvsofp, 0, 10, 10
+cvcfgpe, 12, 10, 10
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+cvcfgpe, 12, 10, 1
+cvlifp, 0, 10
+cvsofp, 12, 0, 10
+cvcfgpe, 12, 1, 10
+cvlifp, 10, 0
+cvsofp, 12, 10, 0
+cvcfgpe, 12, 1, 1
+cvlifp, 10, 10
+cvsofp, 12, 10, 10
+cvcfgpe, 8, 10, 10
+cvlwp, 24
+cvlifp, 0, 0
+cvsofp, 24, 0, 0
+cvcfgpe, 8, 10, 1
+cvlifp, 0, 10
+cvsofp, 24, 0, 10
+cvcfgpe, 8, 1, 10
+cvlifp, 10, 0
+cvsofp, 24, 10, 0
+cvcfgpe, 8, 1, 1
+cvlifp, 10, 10
+cvsofp, 24, 10, 10
+// maxpool
+cfgl, mp
+mplif, 21690
+mpsof, 10874
+// conv
+cfgl, conv, relu, bias
+cfgcv, 32, 16, 3
+cfgcvif, 5, 5
+cvaif, 10874
+cvaw, 0
+cvaof, 21690
+cvselpe, 0
+cvcfgpe, 12, 3, 3
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 4, 3, 3
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+// fc
+cfgl, fc, relu, bias
+cfgfc, 144, 10
+fclif, 21690
+fclw, 0
+fcsof, 10874
+// end of calculation, out feature @10874
+eoc

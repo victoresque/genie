@@ -4,45 +4,60 @@
             [  31:27  |   26:16  |   15:5  |     4:0  ]
 * Layer configuration
     cfgl    [      1  |    type  |    act  |    bias  ]
+
+
+## Fully-connected layer
+            [  31:27  |   26:16  |   15:5  |     4:0  ]
 * FC configuration
     cfgfc   [      2  |     cin  |   cout  |          ]
+
+            [  31:27  |               26:0            ]
+* Load input feature
+    fclif   [      3  |               addr            ]    
+* Load weight
+    fclw    [      4  |               addr            ]
+* Store output feature
+    fcsof   [      5  |               addr            ]
+
+
+## Convolutional Layer
+            [  31:27  |   26:16  |   15:5  |     4:0  ]
 * Conv2d configuration
     cfgcv   [     11  |     cin  |   cout  |  kernel  ]
 * Conv2d IF configuration
-    cfgif   [     12  |  height  |  width  |          ]
+    cfgcvif [     12  |  height  |  width  |          ]
 
-## Fully-connected layer
-            [  31:27  |               26:0           ]
-* Load input feature
-    fclif   [      3  |               addr           ]    
-* Load weight
-    fclw    [      4  |               addr           ]
-* Store output feature
-    fcsof   [      5  |               addr           ]
+            [  31:27  |               26:0            ]
+* Set input feature base address
+    cvaif   [     13  |               addr            ]
+* Set weight base address
+    cvaw    [     14  |               addr            ]
+* Set output feature base address
+    cvaof   [     15  |               addr            ]
+* PE select
+    cvselpe [     16  |               peid            ]
+    
+            [  31:27  |   26:16  |    15:8  |    7:0  ]
+* PE output feature range
+    cvcfgpe [     17  |    oext  |    hext  |   wext  ]
+* Load input feature partition
+    cvlifp  [     18  |          |    hori  |   wori  ]
+* Load weight partition
+    cvlwp   [     19  |    oori  |          |         ]
+* Store output feature partition
+    cvsofp  [     20  |    oori  |    hori  |   wori  ]
 
-## Convolutional Layer
-            [  31:27  |               26:0           ]
-* Load input feature
-    cvlif   [     13  |               addr           ]
-* Load weight
-    cvlw    [     14  |               addr           ]
-* Store output feature
-    cvsof   [     15  |               addr           ]
-* Execution
-    cvexec  [     16  |                              ]
 
 ## Max Pooling
-            [  31:27  |               26:0           ]
+            [  31:27  |               26:0            ]
 * Load input feature
-    mplif   [     21  |               addr           ]
+    mplif   [     28  |               addr            ]
 * Store output feature
-    mpsof   [     22  |               addr           ]
-* Execution
-    mpexec  [     23  |                              ]
+    mpsof   [     29  |               addr            ]
 
 ## Status
 * End of calculation
-    eoc     [     31  |                              ]
+    eoc     [     31  |                               ]
 
 
 # Examples
@@ -74,47 +89,16 @@
 // conv 1
     cfgl, conv, relu, bias
     cfgcv, 1, 16, 3
-    cfgif, 28, 28
-    cvlif, 10874
-    cvlw, 0
-    cvsof, 21690
-    cvexec
-// max pooling 1
-    cfgl, mp
-    cfgif, 26, 26
-    mplif, 21690
-    mpsof, 10874
-    mpexec
-// conv 2
-    cfgl, conv, relu, bias
-    cfgcv, 16, 32, 3
-    cfgif, 13, 13
-    cvlif, 10874
-    cvlw, 160
-    cvsof, 21690
-    cvexec
-// max pooling 2
-    cfgl, mp
-    cfgif, 11, 11
-    mplif, 21690
-    mpsof, 10874
-    mpexec
-// conv 3
-    cfgl, conv, relu, bias
-    cfgcv, 32, 64, 3
-    cfgif, 5, 5
-    cvlif, 10874
-    cvlw, 4800
-    cvsof, 21690
-    cvexec
-// conv 3
-    cfgl, conv, relu, bias
-    cfgcv, 64, 10, 3
-    cfgif, 3, 3
-    cvlif, 21690
-    cvlw, 9424
-    cvsof, 10874
-    cvexec
-    eoc
+    cfgcvif, 28, 28
+    cvaif, 10874
+    cvaw, 0
+    cvaof, 21690
+    cvselpe, 0
+    cvcfgpe, 12, 12, 12
+    cvlifp, 0, 0, 0
+    cvlwp, 0 
+    cfsof, 0, 0, 0
+    cvcfgpe, 12, 12, 12
+
 ```
 
