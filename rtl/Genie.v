@@ -31,7 +31,7 @@ module Genie (
     wire        fc_dout_ready;
     wire [15:0] fc_dout_data;
 
-    wire [26:0] base_addr;
+    wire [26:0] fc_base_addr;
 
     wire        wvalid_[0:3];
     wire        wready_[0:3];
@@ -69,7 +69,7 @@ module Genie (
         .fc_dout_ready(fc_dout_ready),
         .fc_dout_data(fc_dout_data),
 
-        .base_addr(base_addr),
+        .base_addr(fc_base_addr),
         .wvalid(wvalid_[1]),
         .wready(wready_[1]),
         .waddr(waddr_[1]),
@@ -111,9 +111,7 @@ module Genie (
         .fc_lif_start(fc_lif_start),
         .fc_lw_start(fc_lw_start),
         .fc_sof_start(fc_sof_start),
-        .fc_next_partition(1'b0),
-        .fc_done(fc_done),
-
-        .base_addr(base_addr)
+        .fc_base_addr(fc_base_addr),
+        .fc_done(fc_done)
     );
 endmodule
