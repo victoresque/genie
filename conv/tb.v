@@ -39,7 +39,7 @@ module tb;
     reg         din_valid;
     reg  [15:0] din_data;
 
-    BehavConvCore u_BehavConvCore (
+    BehavCVCore u_BehavCVCore (
         .clk(clk),
         .rst_n(rst_n),
         .Hp(5'b0),

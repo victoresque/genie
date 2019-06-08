@@ -27,12 +27,12 @@ module FCDataLoader (
     output        done
 );
     reg   [2:0] state, state_next;
-    parameter S_IDLE        = 0;
-    parameter S_LIF         = 1;
-    parameter S_LW          = 2;
-    parameter S_LB          = 3;
-    parameter S_SOF         = 4;
-    parameter S_DONE        = 5;
+    parameter S_IDLE = 0;
+    parameter S_LIF  = 1;
+    parameter S_LW   = 2;
+    parameter S_LB   = 3;
+    parameter S_SOF  = 4;
+    parameter S_DONE = 5;
 
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;

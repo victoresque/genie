@@ -50,8 +50,8 @@
 
 ## Max Pooling
             [  31:27  |               26:0            ]
-* Load input feature
-    mplif   [     28  |               addr            ]
+* Set input feature base address
+    mpaif   [     28  |               addr            ]
 * Store output feature
     mpsof   [     29  |               addr            ]
 

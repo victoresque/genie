@@ -39,7 +39,7 @@ def assemble(insn):
     elif op == 'cfgcvif':
         opcode = 12
         height, width = int(insn[1]), int(insn[2])
-        return opcode * 2**28 + height * 2**16 + width * 2**5
+        return opcode * 2**27 + height * 2**16 + width * 2**5
     elif op == 'cvaif':
         opcode = 13
         addr = int(insn[1])

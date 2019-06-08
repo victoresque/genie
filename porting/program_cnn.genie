@@ -6,60 +6,60 @@ cvaif, 10874
 cvaw, 0
 cvaof, 21690
 cvselpe, 0
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlwp, 0
 cvlifp, 0, 0
 cvsofp, 0, 0, 0
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlifp, 0, 10
 cvsofp, 0, 0, 10
-cvcfgpe, 12, 10, 6
+cvcfgpe, 12, 12, 8
 cvlifp, 0, 20
 cvsofp, 0, 0, 20
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlifp, 10, 0
 cvsofp, 0, 10, 0
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlifp, 10, 10
 cvsofp, 0, 10, 10
-cvcfgpe, 12, 10, 6
+cvcfgpe, 12, 12, 8
 cvlifp, 10, 20
 cvsofp, 0, 10, 20
-cvcfgpe, 12, 6, 10
+cvcfgpe, 12, 8, 12
 cvlifp, 20, 0
 cvsofp, 0, 20, 0
-cvcfgpe, 12, 6, 10
+cvcfgpe, 12, 8, 12
 cvlifp, 20, 10
 cvsofp, 0, 20, 10
-cvcfgpe, 12, 6, 6
+cvcfgpe, 12, 8, 8
 cvlifp, 20, 20
 cvsofp, 0, 20, 20
-cvcfgpe, 4, 10, 10
+cvcfgpe, 4, 12, 12
 cvlwp, 12
 cvlifp, 0, 0
 cvsofp, 12, 0, 0
-cvcfgpe, 4, 10, 10
+cvcfgpe, 4, 12, 12
 cvlifp, 0, 10
 cvsofp, 12, 0, 10
-cvcfgpe, 4, 10, 6
+cvcfgpe, 4, 12, 8
 cvlifp, 0, 20
 cvsofp, 12, 0, 20
-cvcfgpe, 4, 10, 10
+cvcfgpe, 4, 12, 12
 cvlifp, 10, 0
 cvsofp, 12, 10, 0
-cvcfgpe, 4, 10, 10
+cvcfgpe, 4, 12, 12
 cvlifp, 10, 10
 cvsofp, 12, 10, 10
-cvcfgpe, 4, 10, 6
+cvcfgpe, 4, 12, 8
 cvlifp, 10, 20
 cvsofp, 12, 10, 20
-cvcfgpe, 4, 6, 10
+cvcfgpe, 4, 8, 12
 cvlifp, 20, 0
 cvsofp, 12, 20, 0
-cvcfgpe, 4, 6, 10
+cvcfgpe, 4, 8, 12
 cvlifp, 20, 10
 cvsofp, 12, 20, 10
-cvcfgpe, 4, 6, 6
+cvcfgpe, 4, 8, 8
 cvlifp, 20, 20
 cvsofp, 12, 20, 20
 // maxpool
@@ -74,43 +74,43 @@ cvaif, 10874
 cvaw, 0
 cvaof, 21690
 cvselpe, 0
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlwp, 0
 cvlifp, 0, 0
 cvsofp, 0, 0, 0
-cvcfgpe, 12, 10, 1
+cvcfgpe, 12, 12, 3
 cvlifp, 0, 10
 cvsofp, 0, 0, 10
-cvcfgpe, 12, 1, 10
+cvcfgpe, 12, 3, 12
 cvlifp, 10, 0
 cvsofp, 0, 10, 0
-cvcfgpe, 12, 1, 1
+cvcfgpe, 12, 3, 3
 cvlifp, 10, 10
 cvsofp, 0, 10, 10
-cvcfgpe, 12, 10, 10
+cvcfgpe, 12, 12, 12
 cvlwp, 12
 cvlifp, 0, 0
 cvsofp, 12, 0, 0
-cvcfgpe, 12, 10, 1
+cvcfgpe, 12, 12, 3
 cvlifp, 0, 10
 cvsofp, 12, 0, 10
-cvcfgpe, 12, 1, 10
+cvcfgpe, 12, 3, 12
 cvlifp, 10, 0
 cvsofp, 12, 10, 0
-cvcfgpe, 12, 1, 1
+cvcfgpe, 12, 3, 3
 cvlifp, 10, 10
 cvsofp, 12, 10, 10
-cvcfgpe, 8, 10, 10
+cvcfgpe, 8, 12, 12
 cvlwp, 24
 cvlifp, 0, 0
 cvsofp, 24, 0, 0
-cvcfgpe, 8, 10, 1
+cvcfgpe, 8, 12, 3
 cvlifp, 0, 10
 cvsofp, 24, 0, 10
-cvcfgpe, 8, 1, 10
+cvcfgpe, 8, 3, 12
 cvlifp, 10, 0
 cvsofp, 24, 10, 0
-cvcfgpe, 8, 1, 1
+cvcfgpe, 8, 3, 3
 cvlifp, 10, 10
 cvsofp, 24, 10, 10
 // maxpool
@@ -125,11 +125,11 @@ cvaif, 10874
 cvaw, 0
 cvaof, 21690
 cvselpe, 0
-cvcfgpe, 12, 3, 3
+cvcfgpe, 12, 5, 5
 cvlwp, 0
 cvlifp, 0, 0
 cvsofp, 0, 0, 0
-cvcfgpe, 4, 3, 3
+cvcfgpe, 4, 5, 5
 cvlwp, 12
 cvlifp, 0, 0
 cvsofp, 12, 0, 0

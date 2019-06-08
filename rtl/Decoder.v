@@ -18,6 +18,7 @@ module Decoder (
     input         fc_done,
 
     output        cv_rst,
+    output  [4:0] cv_peid,
     output [10:0] cv_I,
     output [10:0] cv_O,
     output  [4:0] cv_K,
@@ -30,9 +31,12 @@ module Decoder (
     output  [7:0] cv_Hori,
     output  [7:0] cv_Wori,
     output [26:0] cv_ifaddr,
-    output [26:0] cv_waddr,
+    output [26:0] cv_weaddr,
     output [26:0] cv_ofaddr,
-    output  [4:0] cv_peid
+    output        cv_load_weight,
+    output        cv_load_input,
+    output        cv_store_output,
+    input         cv_done
 );
     reg   [5:0] state, state_next;
     parameter S_INSN_DEC = 0;
@@ -51,7 +55,7 @@ module Decoder (
     parameter S_CVLIFP   = 18;
     parameter S_CVLWP    = 19;
     parameter S_CVSOFP   = 20;
-    parameter S_MPLIF    = 28;
+    parameter S_MPAIF    = 28;
     parameter S_MPSOF    = 29;
     parameter S_EOC      = 31;
 
@@ -62,17 +66,12 @@ module Decoder (
 
     reg  [10:0] layer_cfg_r, layer_cfg_w;
 
-    wire  [4:0] layer_type;
-    wire  [4:0] act_type;
-    wire        has_bias;
     assign layer_type = layer_cfg_r[10:6];
     assign act_type = layer_cfg_r[5:1];
     assign has_bias = layer_cfg_r[0];
 
     wire        is_fc;
     reg  [21:0] fc_cfg_r, fc_cfg_w;
-    wire [11:0] fc_cin;
-    wire [11:0] fc_cout;
     assign is_fc = layer_type == `LAYER_FC;
     assign fc_rst = state == S_CFGFC;
     assign fc_lif_start = state == S_FCLIF;
@@ -81,22 +80,20 @@ module Decoder (
     assign fc_cin = fc_cfg_r[21:11];
     assign fc_cout = fc_cfg_r[10:0];
 
-    wire [26:0] fc_base_addr;
     reg  [26:0] fc_base_addr_r, fc_base_addr_w;
     assign fc_base_addr = fc_base_addr_r;
 
-    wire        if_cv;
-    wire        cv_rst;
+    wire        is_cv;
     reg  [26:0] cv_cfg_r, cv_cfg_w;
     reg  [21:0] cv_ifcfg_r, cv_ifcfg_w;
     reg  [26:0] cv_pecfg_r, cv_pecfg_w;
     reg  [15:0] cv_ifori_r, cv_ifori_w;
     reg  [10:0] cv_wori_r, cv_wori_w;
     reg  [26:0] cv_ifaddr_r, cv_ifaddr_w;
-    reg  [26:0] cv_waddr_r, cv_waddr_w;
+    reg  [26:0] cv_weaddr_r, cv_weaddr_w;
     reg  [26:0] cv_ofaddr_r, cv_ofaddr_w;
 
-    assign is_cv = layer_type == `LAYER_CONV;
+    assign is_cv = layer_type == `LAYER_CV;
     assign cv_rst = state == S_CFGCV;
     assign cv_I = cv_cfg_r[26:16];
     assign cv_O = cv_cfg_r[15:5];
@@ -110,8 +107,11 @@ module Decoder (
     assign cv_Hori = cv_ifori_r[15:8];
     assign cv_Wori = cv_ifori_r[7:0];
     assign cv_ifaddr = cv_ifaddr_r;
-    assign cv_waddr = cv_waddr_r;
+    assign cv_weaddr = cv_weaddr_r;
     assign cv_ofaddr = cv_ofaddr_r;
+    assign cv_load_weight = state == S_CVLWP;
+    assign cv_load_input = state == S_CVLIFP;
+    assign cv_store_output = state == S_CVSOFP;
     assign cv_peid = 0;
 
     always @ (*) begin
@@ -125,9 +125,10 @@ module Decoder (
         cv_ifori_w = cv_ifori_r;
         cv_wori_w = cv_wori_r;
         cv_ifaddr_w = cv_ifaddr_r;
-        cv_waddr_w = cv_waddr_r;
+        cv_weaddr_w = cv_weaddr_r;
         cv_ofaddr_w = cv_ofaddr_r;
         state_next = state;
+        
         case(state)
         S_INSN_DEC: begin
             case(opcode)
@@ -164,7 +165,7 @@ module Decoder (
                 state_next = S_CVAIF;
             end
             `OP_CVAW: begin
-                cv_waddr_w = idata[26:0];
+                cv_weaddr_w = idata[26:0];
                 state_next = S_CVAW;
             end
             `OP_CVAOF: begin
@@ -189,8 +190,8 @@ module Decoder (
             `OP_CVSOFP: begin
                 state_next = S_CVSOFP;
             end
-            `OP_MPLIF: begin
-                state_next = S_MPLIF;
+            `OP_MPAIF: begin
+                state_next = S_MPAIF;
             end
             `OP_MPSOF: begin
                 state_next = S_MPSOF;
@@ -244,15 +245,21 @@ module Decoder (
             state_next = S_INSN_DEC;
         end
         S_CVLIFP: begin
-            state_next = S_INSN_DEC;
+            if (cv_done) begin
+                state_next = S_INSN_DEC;
+            end
         end
         S_CVLWP: begin
-            state_next = S_INSN_DEC;
+            if (cv_done) begin
+                state_next = S_INSN_DEC;
+            end
         end
         S_CVSOFP: begin
-            state_next = S_INSN_DEC;
+            if (cv_done) begin
+                state_next = S_INSN_DEC;
+            end
         end
-        S_MPLIF: begin
+        S_MPAIF: begin
             state_next = S_INSN_DEC;
         end
         S_MPSOF: begin
@@ -260,7 +267,7 @@ module Decoder (
         end
         S_EOC: begin
             # (`CYCLE * 10);
-            $display("FINISH");
+            $display(">>>>>>>>>> FINISH <<<<<<<<<<");
             $finish();
         end
         endcase
@@ -278,7 +285,7 @@ module Decoder (
             cv_ifori_r <= 0;
             cv_wori_r <= 0;
             cv_ifaddr_r <= 0;
-            cv_waddr_r <= 0;
+            cv_weaddr_r <= 0;
             cv_ofaddr_r <= 0;
             state <= S_INSN_DEC;
         end
@@ -293,7 +300,7 @@ module Decoder (
             cv_ifori_r <= cv_ifori_w;
             cv_wori_r <= cv_wori_w;
             cv_ifaddr_r <= cv_ifaddr_w;
-            cv_waddr_r <= cv_waddr_w;
+            cv_weaddr_r <= cv_weaddr_w;
             cv_ofaddr_r <= cv_ofaddr_w;
             state <= state_next;
         end

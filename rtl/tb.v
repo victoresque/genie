@@ -10,10 +10,10 @@ module tb;
     wire               rst_n;
 
     initial begin
-        $dumpfile("tb.vcd");
-        $dumpvars;
-        // $fsdbDumpfile("tb.fsdb");
-        // $fsdbDumpvars;
+        // $dumpfile("tb.vcd");
+        // $dumpvars;
+        $fsdbDumpfile("tb.fsdb");
+        $fsdbDumpvars;
     end
 
     wire        wvalid;

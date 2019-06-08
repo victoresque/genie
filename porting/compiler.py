@@ -89,7 +89,7 @@ if __name__ == '__main__':
                         for w in range(0, W, Wp-K+1):
                             Oori, Hori, Wori = s, h, w
                             program.append(['cvcfgpe', Oext,
-                                            min(H, h+Hp)-h-K+1, min(W, w+Wp)-w-K+1])
+                                            min(H, h+Hp)-h, min(W, w+Wp)-w])
                             if not wloaded:
                                 program.append(['cvlwp', s])
                                 wloaded = True

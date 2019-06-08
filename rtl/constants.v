@@ -13,10 +13,10 @@
 `define OP_CVLIFP   18
 `define OP_CVLWP    19
 `define OP_CVSOFP   20
-`define OP_MPLIF    28
+`define OP_MPAIF    28
 `define OP_MPSOF    29
 `define OP_EOC      31
 
 `define LAYER_FC    1
-`define LAYER_CONV  2
+`define LAYER_CV    2
 `define LAYER_MP    3
