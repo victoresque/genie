@@ -2,9 +2,9 @@
 cfgl, conv, relu, bias
 cfgcv, 1, 16, 3
 cfgcvif, 28, 28
-cvaif, 10874
+cvaif, 10832
 cvaw, 0
-cvaof, 21690
+cvaof, 21648
 cvselpe, 0
 cvcfgpe, 12, 12, 12
 cvlwp, 0
@@ -64,15 +64,17 @@ cvlifp, 20, 20
 cvsofp, 12, 20, 20
 // maxpool
 cfgl, mp
-mplif, 21690
-mpsof, 10874
+cfgcv, 16, 16, 0
+cfgcvif, 26, 26
+mpaif, 21648
+mpsof, 10832
 // conv
-cfgl, conv, relu, bias
+cfgl, conv, relu, nobias
 cfgcv, 16, 32, 3
 cfgcvif, 13, 13
-cvaif, 10874
-cvaw, 0
-cvaof, 21690
+cvaif, 10832
+cvaw, 160
+cvaof, 21648
 cvselpe, 0
 cvcfgpe, 12, 12, 12
 cvlwp, 0
@@ -115,15 +117,17 @@ cvlifp, 10, 10
 cvsofp, 24, 10, 10
 // maxpool
 cfgl, mp
-mplif, 21690
-mpsof, 10874
+cfgcv, 32, 32, 0
+cfgcvif, 11, 11
+mpaif, 21648
+mpsof, 10832
 // conv
 cfgl, conv, relu, bias
 cfgcv, 32, 16, 3
 cfgcvif, 5, 5
-cvaif, 10874
-cvaw, 0
-cvaof, 21690
+cvaif, 10832
+cvaw, 4768
+cvaof, 21648
 cvselpe, 0
 cvcfgpe, 12, 5, 5
 cvlwp, 0
@@ -134,10 +138,10 @@ cvlwp, 12
 cvlifp, 0, 0
 cvsofp, 12, 0, 0
 // fc
-cfgl, fc, relu, bias
+cfgl, fc, relu, nobias
 cfgfc, 144, 10
-fclif, 21690
-fclw, 0
-fcsof, 10874
-// end of calculation, out feature @10874
+fclif, 21648
+fclw, 9392
+fcsof, 10832
+// end of calculation, out feature @10832
 eoc

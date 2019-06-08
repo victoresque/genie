@@ -64,12 +64,11 @@ module CVDataLoader (
     reg   [7:0] w_w, w_r;
     reg  [10:0] o_w, o_r;
     reg  [10:0] i_w, i_r;
+    reg         core_dout_ready_w, core_dout_ready_r;
 
     assign Hout = Hext - K + 1;
     assign Wout = Wext - K + 1;
-
-    reg         core_dout_ready_w, core_dout_ready_r;
-    assign core_dout_ready = core_dout_ready_r;
+    assign core_dout_ready = core_dout_ready_w;
     
     assign waddr = waddr_r;
     assign raddr = raddr_r;
@@ -107,6 +106,10 @@ module CVDataLoader (
                 else if (store_output && core_calc_done) begin
                     state_next = S_SOF;
                 end
+                h_w = 0;
+                w_w = 0;
+                o_w = 0;
+                i_w = 0;
                 waiting_w = 0;
                 cnt_w = 0;
             end
@@ -123,7 +126,7 @@ module CVDataLoader (
                 else begin
                     if (~waiting_r) begin
                         rvalid_w = 1'b1;
-                        raddr_w = weaddr + cnt_r;
+                        raddr_w = weaddr + Oori * I * K * K + cnt_r;
                         waiting_w = 1;
                     end
                     else if (rready) begin
@@ -159,7 +162,7 @@ module CVDataLoader (
                         rvalid_w = 1'b1;
                         raddr_w = ifaddr + i_r * H * W + (Hori + h_r) * W + (Wori + w_r);
                         w_w = (w_r == Wext - 1) ? 0 : w_r + 1;
-                        h_w = (w_r == Wext - 1) ? ((h_r == (Hext - 1)) ? 1 : h_r + 1) : h_r;
+                        h_w = (w_r == Wext - 1) ? ((h_r == (Hext - 1)) ? 0 : h_r + 1) : h_r;
                         i_w = ((w_r == Wext - 1) && (h_r == (Hext - 1))) ? i_r + 1 : i_r;
                         waiting_w = 1;
                     end
@@ -178,9 +181,9 @@ module CVDataLoader (
                     if (~waiting_r) begin
                         if (core_dout_valid) begin
                             wvalid_w = 1'b1;
-                            waddr_w = ofaddr + (Oori + o_r) * Hout * Wout + (Hori + h_r) * Wout + (Wori + w_r);
+                            waddr_w = ofaddr + (Oori + o_r) * (H - K + 1) * (W - K + 1) + (Hori + h_r) * (W - K + 1) + (Wori + w_r);
                             w_w = (w_r == Wout - 1) ? 0 : w_r + 1;
-                            h_w = (w_r == Wout - 1) ? ((h_r == (Hout - 1)) ? 1 : h_r + 1) : h_r;
+                            h_w = (w_r == Wout - 1) ? ((h_r == (Hout - 1)) ? 0 : h_r + 1) : h_r;
                             o_w = ((w_r == Wout - 1) && (h_r == (Hout - 1))) ? o_r + 1 : o_r;
                             wdata_w = {16'b0, core_dout_data};
                             waiting_w = 1;

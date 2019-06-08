@@ -21,8 +21,10 @@ module Genie (
 
     wire        is_fc;
     wire        is_cv;
+    wire        is_mp;
     assign is_fc = layer_type == `LAYER_FC;
     assign is_cv = layer_type == `LAYER_CV;
+    assign is_mp = layer_type == `LAYER_MP;
 
     wire        wvalid_[0:3];
     wire        wready_[0:3];
@@ -36,14 +38,17 @@ module Genie (
     assign wvalid = wvalid_[layer_type[1:0]];
     assign wready_[`LAYER_FC] = wready & is_fc;
     assign wready_[`LAYER_CV] = wready & is_cv;
+    assign wready_[`LAYER_MP] = wready & is_mp;
     assign waddr = waddr_[layer_type[1:0]];
     assign wdata = wdata_[layer_type[1:0]];
     assign rvalid = rvalid_[layer_type[1:0]];
     assign rready_[`LAYER_FC] = rready & is_fc;
     assign rready_[`LAYER_CV] = rready & is_cv;
+    assign rready_[`LAYER_MP] = rready & is_mp;
     assign raddr = raddr_[layer_type[1:0]];
     assign rdata_[`LAYER_FC] = rdata & {32{is_fc}};
     assign rdata_[`LAYER_CV] = rdata & {32{is_cv}};
+    assign rdata_[`LAYER_MP] = rdata & {32{is_mp}};
 
     wire        fc_rst;
     wire [11:0] fc_cin;
@@ -197,6 +202,32 @@ module Genie (
         .Wext(cv_Wext)
     );
 
+    wire        mp_rst;
+    wire [26:0] mp_ifaddr;
+    wire [26:0] mp_ofaddr;
+    wire        mp_done;
+
+    MPDataLoader u_MPDataLoader (
+        .clk(clk),
+        .rst(mp_rst),
+        .C(cv_O),
+        .H(cv_H),
+        .W(cv_W),
+        .ifaddr(mp_ifaddr),
+        .ofaddr(mp_ofaddr),
+
+        .wvalid(wvalid_[`LAYER_MP]),
+        .wready(wready_[`LAYER_MP]),
+        .waddr(waddr_[`LAYER_MP]),
+        .wdata(wdata_[`LAYER_MP]),
+        .rvalid(rvalid_[`LAYER_MP]),
+        .rready(rready_[`LAYER_MP]),
+        .raddr(raddr_[`LAYER_MP]),
+        .rdata(rdata_[`LAYER_MP]),
+
+        .done(mp_done)
+    );
+
     Decoder u_Decoder (
         .clk(clk),
         .rst_n(rst_n),
@@ -236,6 +267,11 @@ module Genie (
         .cv_load_weight(cv_load_weight),
         .cv_load_input(cv_load_input),
         .cv_store_output(cv_store_output),
-        .cv_done(cv_done)
+        .cv_done(cv_done),
+
+        .mp_rst(mp_rst),
+        .mp_ifaddr(mp_ifaddr),
+        .mp_ofaddr(mp_ofaddr),
+        .mp_done(mp_done)
     );
 endmodule

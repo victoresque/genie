@@ -13,7 +13,7 @@ if __name__ == '__main__':
     model[model < 0] += 2**16
     model = model.astype(np.uint16)
 
-    with open('../mem/model.mem', 'w') as f:
+    with open('../../mem/model.mem', 'w') as f:
         f.write('@0\n')
         for p in model:
             f.write('{:04x}\n'.format(p))

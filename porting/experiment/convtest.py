@@ -14,32 +14,33 @@ def to_fixed16(a):
 if __name__ == '__main__':
     ext_mem_size = 67108864
 
-    H, W, I, O, K = 40, 40, 64, 32, 3
-    a = torch.randn(1, I, H, W) / 2
-    b = torch.randn(O, I, K, K) / 2
-    c = torch.nn.functional.conv2d(a, b)
+    H, W, I, O, K = 32, 32, 2, 32, 3
+    a = torch.randn(1, I, H, W) / 4
+    # b = torch.randn(O, I, K, K) / 4
+    b = torch.randn(0)
+    # c = torch.nn.functional.conv2d(a, b)
+    c = torch.nn.functional.max_pool2d(a, kernel_size=2)
 
     print(a.shape)
     print(b.shape)
     print(c.shape)
 
     a = to_fixed16(a.data.numpy().flatten())
-    b = to_fixed16(b.data.numpy().flatten())
+    # b = to_fixed16(b.data.numpy().flatten())
+    b = b.data.numpy().flatten()
     c = to_fixed16(c.data.numpy().flatten())
 
     print(a, b, c)
 
-    with open('./mem/a.mem', 'w') as f:
+    np.save('convtest.npy', b)
+
+    with open('../mem/din.mem', 'w') as f:
+        f.write('@{:x}\n'.format(int(sys.argv[1])))
         for x in a:
             f.write('{:04x}\n'.format(x))
-        f.write('@{:x}\n'.format(32768-1))
+        f.write('@{:x}\n'.format(ext_mem_size-1))
 
-    with open('./mem/b.mem', 'w') as f:
-        for x in b:
-            f.write('{:04x}\n'.format(x))
-        f.write('@{:x}\n'.format(32768-1))
-
-    with open('./mem/c.mem', 'w') as f:
+    with open('../mem/golden.mem', 'w') as f:
         for x in c:
             f.write('{:04x}\n'.format(x))
         f.write('@{:x}\n'.format(32768-1))

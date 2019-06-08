@@ -8,21 +8,14 @@ import numpy as np
 
 
 def train(T):
-    class Flatten(nn.Module):
-        def forward(self, x):
-            x = x.view(x.size()[0], -1)
-            return x
     model = nn.Sequential(
-        nn.Conv2d(1, 16, 3),
+        nn.Linear(784, 32),
         nn.ReLU(inplace=True),
-        nn.MaxPool2d(2),
-        nn.Conv2d(16, 32, 3),
+        nn.Linear(32, 64),
         nn.ReLU(inplace=True),
-        nn.MaxPool2d(2),
-        nn.Conv2d(32, 16, 3),
+        nn.Linear(64, 32, bias=False),
         nn.ReLU(inplace=True),
-        Flatten(),
-        nn.Linear(144, 10),
+        nn.Linear(32, 10, bias=False),
     )
     optimizer = SGD(model.parameters(), lr=1e-1)
 
@@ -32,14 +25,12 @@ def train(T):
         for img, label in tqdm(train_loader):
             target = torch.zeros(1, 10)
             target[0, label] = 1
-
+            img = img.view(1, -1)
             optimizer.zero_grad()
             output = model(img)
-
             loss = nn.functional.mse_loss(output, target)
             loss.backward()
             optimizer.step()
-
             if (output.argmax() == target.argmax()):
                 correct = correct + 1
             total_loss = total_loss + loss.item()
@@ -50,10 +41,8 @@ def train(T):
         for img, label in tqdm(test_loader):
             target = torch.zeros(1, 10)
             target[0, label] = 1
-            target = target.view(1, 10, 1, 1)
-
+            img = img.view(1, -1)
             output = model(img)
-
             if (output.argmax() == target.argmax()):
                 correct = correct + 1
         print('val_acc: ', correct / len(test_loader))
@@ -63,7 +52,7 @@ def train(T):
 
 if __name__ == '__main__':
     mnist_data = datasets.MNIST(
-        './data', train=True, download=True, transform=transforms.ToTensor())
+        '../data', train=True, download=True, transform=transforms.ToTensor())
 
     ntrain = 10000
     ntest = 1000
@@ -84,4 +73,4 @@ if __name__ == '__main__':
         all_param = np.concatenate((all_param, p.data.numpy().flatten()))
 
     all_param = all_param.flatten()
-    np.save('model_cnn.npy', all_param)
+    np.save('../model/model_dnn.npy', all_param)

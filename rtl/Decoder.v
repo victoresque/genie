@@ -36,7 +36,12 @@ module Decoder (
     output        cv_load_weight,
     output        cv_load_input,
     output        cv_store_output,
-    input         cv_done
+    input         cv_done,
+
+    output        mp_rst,
+    output [26:0] mp_ifaddr,
+    output [26:0] mp_ofaddr,
+    input         mp_done
 );
     reg   [5:0] state, state_next;
     parameter S_INSN_DEC = 0;
@@ -65,13 +70,13 @@ module Decoder (
     assign opcode = idata[31:27];
 
     reg  [10:0] layer_cfg_r, layer_cfg_w;
-
     assign layer_type = layer_cfg_r[10:6];
     assign act_type = layer_cfg_r[5:1];
     assign has_bias = layer_cfg_r[0];
 
     wire        is_fc;
     reg  [21:0] fc_cfg_r, fc_cfg_w;
+    reg  [26:0] fc_base_addr_r, fc_base_addr_w;
     assign is_fc = layer_type == `LAYER_FC;
     assign fc_rst = state == S_CFGFC;
     assign fc_lif_start = state == S_FCLIF;
@@ -79,8 +84,6 @@ module Decoder (
     assign fc_sof_start = state == S_FCSOF;
     assign fc_cin = fc_cfg_r[21:11];
     assign fc_cout = fc_cfg_r[10:0];
-
-    reg  [26:0] fc_base_addr_r, fc_base_addr_w;
     assign fc_base_addr = fc_base_addr_r;
 
     wire        is_cv;
@@ -92,7 +95,6 @@ module Decoder (
     reg  [26:0] cv_ifaddr_r, cv_ifaddr_w;
     reg  [26:0] cv_weaddr_r, cv_weaddr_w;
     reg  [26:0] cv_ofaddr_r, cv_ofaddr_w;
-
     assign is_cv = layer_type == `LAYER_CV;
     assign cv_rst = state == S_CFGCV;
     assign cv_I = cv_cfg_r[26:16];
@@ -114,6 +116,17 @@ module Decoder (
     assign cv_store_output = state == S_CVSOFP;
     assign cv_peid = 0;
 
+    wire        is_mp;
+    reg  [26:0] mp_ifaddr_r, mp_ifaddr_w;
+    reg  [26:0] mp_ofaddr_r, mp_ofaddr_w;
+    reg         mp_rst_r;
+    wire        mp_rst_w;
+    assign mp_rst_w = state_next == S_MPSOF && !(state == S_MPSOF);
+    assign is_mp = layer_type == `LAYER_MP;
+    assign mp_rst = mp_rst_r;
+    assign mp_ifaddr = mp_ifaddr_r;
+    assign mp_ofaddr = mp_ofaddr_r;
+
     always @ (*) begin
         iaddr_w = iaddr_r;
         layer_cfg_w = layer_cfg_r;
@@ -127,6 +140,8 @@ module Decoder (
         cv_ifaddr_w = cv_ifaddr_r;
         cv_weaddr_w = cv_weaddr_r;
         cv_ofaddr_w = cv_ofaddr_r;
+        mp_ifaddr_w = mp_ifaddr_r;
+        mp_ofaddr_w = mp_ofaddr_r;
         state_next = state;
         
         case(state)
@@ -191,9 +206,11 @@ module Decoder (
                 state_next = S_CVSOFP;
             end
             `OP_MPAIF: begin
+                mp_ifaddr_w = idata[26:0];
                 state_next = S_MPAIF;
             end
             `OP_MPSOF: begin
+                mp_ofaddr_w = idata[26:0];
                 state_next = S_MPSOF;
             end
             `OP_EOC: begin
@@ -263,7 +280,9 @@ module Decoder (
             state_next = S_INSN_DEC;
         end
         S_MPSOF: begin
-            state_next = S_INSN_DEC;
+            if (mp_done) begin
+                state_next = S_INSN_DEC;
+            end
         end
         S_EOC: begin
             # (`CYCLE * 10);
@@ -287,6 +306,9 @@ module Decoder (
             cv_ifaddr_r <= 0;
             cv_weaddr_r <= 0;
             cv_ofaddr_r <= 0;
+            mp_rst_r <= 0;
+            mp_ifaddr_r <= 0;
+            mp_ofaddr_r <= 0;
             state <= S_INSN_DEC;
         end
         else begin
@@ -302,6 +324,9 @@ module Decoder (
             cv_ifaddr_r <= cv_ifaddr_w;
             cv_weaddr_r <= cv_weaddr_w;
             cv_ofaddr_r <= cv_ofaddr_w;
+            mp_rst_r <= mp_rst_w;
+            mp_ifaddr_r <= mp_ifaddr_w;
+            mp_ofaddr_r <= mp_ofaddr_w;
             state <= state_next;
         end
     end

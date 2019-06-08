@@ -20,7 +20,6 @@ module BehavCVCore (
     input   [7:0] Wext
 );
     reg        dout_valid;
-    reg [15:0] dout_data;
     reg        calc_done;
 
     reg        waiting;
@@ -40,8 +39,10 @@ module BehavCVCore (
     reg  [15:0] psum[0:32768];
     reg  [15:0] bias[0:1023];
 
-    reg is_first_iblock;
-    integer idx, h, w, i, o, addr, sum, ifidx;
+    integer idx, h, w, i, o, addr, ifidx;
+    reg  [31:0] sum;
+
+    assign dout_data = psum[addr][15] ? 0 : psum[addr];
 
     always @ (*) begin  
         sum = 0;
@@ -65,17 +66,18 @@ module BehavCVCore (
                           * $signed(weight[o * Iext * K * K + ifidx * K * K + 1 * K + 2])
                 + $signed(ifmap[ifidx * Hext * Wext + (h+1) * Wext + (w+1)]) 
                           * $signed(weight[o * Iext * K * K + ifidx * K * K + 2 * K + 2]);
-            if (has_bias) begin
-                sum = $signed(sum) + $signed(bias[o]);
-            end
+        end
+        if (has_bias) begin
+            sum = $signed(sum) + $signed({{6{bias[o][15]}}, bias[o], 10'b0});
         end
     end
 
     always @ (posedge clk) begin
         if (rst) begin
-            for (idx = 0; idx < Iext * Hext * Wext; idx = idx + 1) ifmap[idx] <= 32'bx;
-            for (idx = 0; idx < Oext * Iext * K * K; idx = idx + 1) weight[idx] <= 32'bx;
-            for (idx = 0; idx < Oext * (Hext - K + 1) * (Wext - K + 1); idx = idx + 1) psum[idx] <= 32'bx;
+            for (idx = 0; idx < 32768; idx = idx + 1) ifmap[idx] <= 32'bx;
+            for (idx = 0; idx < 32768; idx = idx + 1) weight[idx] <= 32'bx;
+            for (idx = 0; idx < 32768; idx = idx + 1) psum[idx] <= 32'bx;
+            for (idx = 0; idx < 1024; idx = idx + 1) bias[idx] <= 32'bx;
             addr <= 0;
             calc_done <= 0;
             dout_valid <= 0;
@@ -99,7 +101,6 @@ module BehavCVCore (
                     if (din_valid) begin
                         weight[addr] <= din_data;
                         if (addr == Oext * Iext * K * K - 1) begin
-                            is_first_iblock <= 1;
                             addr <= 0;
                             h <= 1;
                             w <= 1;
@@ -122,7 +123,7 @@ module BehavCVCore (
                         bias[addr] <= din_data;
                         if (addr == Oext - 1) begin
                             addr <= 0;
-                            state <= S_READ_INPUT;
+                            state <= S_DONE1;
                         end
                         else begin
                             addr <= addr + 1;
@@ -161,18 +162,6 @@ module BehavCVCore (
                 end
                 S_OUTPUT: begin
                     dout_valid <= 1;
-                    dout_data <= psum[addr][15] ? 0 : psum[addr];
-
-                    // perform ReLU here
-                    if (has_bias) begin    
-                        if (i == (Hext - K + 1) * (Wext - K + 1) - 1) begin
-                            o <= 0;
-                            i <= 0;
-                        end
-                        else begin
-                            i <= i + 1;
-                        end
-                    end
 
                     calc_done <= 0;
                     if (dout_ready) begin
