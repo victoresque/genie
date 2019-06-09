@@ -1,9 +1,13 @@
+`include "constants.v"
+
+
 module FCCore (
     input         clk,
     input         rst,
     input  [11:0] cin,
     input  [11:0] cout,
     input         has_bias,
+    input   [4:0] act_type,
     input         din_valid,
     input  [15:0] din_data,
     output        dout_valid,
@@ -53,7 +57,7 @@ module FCCore (
 
     wire [15:0] sum = $signed(has_bias ? if_rdata[15:0] : 0) + $signed(of_rdata[15:0]);
     // TODO: move activation to upper level
-    assign dout_data = sum[15] ? 0 : {16'b0, sum};
+    assign dout_data = (act_type == `ACT_RELU) ? (sum[15] ? 0 : sum) : sum;
 
     reg  [31:0] MULT;
 

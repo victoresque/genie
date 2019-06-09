@@ -69,72 +69,63 @@ module FCDataLoader (
     
         case(state)
         S_IDLE: begin
+            rvalid_w = 1'b0;
+            wvalid_w = 1'b0;
+            waiting_w = 0;
+            cnt_w = 0;
             if (lif_start) begin
+                rvalid_w = 1'b1;
+                raddr_w = base_addr;
+                cnt_w = 1;
                 state_next = S_LIF;
             end
             else if (lw_start) begin
+                rvalid_w = 1'b1;
+                raddr_w = base_addr;
+                cnt_w = 1;
                 state_next = S_LW;
             end
             else if (sof_start) begin
                 state_next = S_SOF;
             end
-            waiting_w = 0;
-            cnt_w = 0;
         end
         S_LIF: begin
-            if (cnt_r == cin) begin
-                state_next = S_DONE;
-            end
-            else begin
-                if (~waiting_r) begin
-                    rvalid_w = 1'b1;
-                    raddr_w = base_addr + cnt_r;
-                    waiting_w = 1;
-                end
-                else if (rready) begin
+            if (rready) begin
+                rvalid_w = 1'b1;
+                raddr_w = base_addr + cnt_r;
+                cnt_w = cnt_r + 1;
+                if (cnt_r == cin) begin
                     rvalid_w = 1'b0;
-                    cnt_w = cnt_r + 1;
-                    waiting_w = 0;
+                    state_next = S_DONE;
                 end
             end
         end
         S_LW: begin
-            if (cnt_r == total_weight_r) begin
-                if (has_bias) begin
-                    cnt_w = 0;
-                    state_next = S_LB;
-                end
-                else begin
-                    state_next = S_DONE;
-                end
-            end
-            else begin
-                if (~waiting_r) begin
-                    rvalid_w = 1'b1;
-                    raddr_w = base_addr + cnt_r;
-                    waiting_w = 1;
-                end
-                else if (rready) begin
-                    rvalid_w = 1'b0;
-                    cnt_w = cnt_r + 1;
-                    waiting_w = 0;
+            if (rready) begin
+                rvalid_w = 1'b1;
+                raddr_w = base_addr + cnt_r;
+                cnt_w = cnt_r + 1;
+                if (cnt_r == total_weight_r) begin
+                    if (has_bias) begin
+                        raddr_w = base_addr + total_weight_r;
+                        cnt_w = 1;
+                        state_next = S_LB;
+                    end
+                    else begin
+                        rvalid_w = 1'b0;
+                        state_next = S_DONE;
+                    end
                 end
             end
         end
         S_LB: begin
-            if (cnt_r == cout) begin
-                state_next = S_DONE;
-            end
-            else begin
-                if (~waiting_r) begin
-                    rvalid_w = 1'b1;
-                    raddr_w = base_addr + total_weight_r + cnt_r;
-                    waiting_w = 1;
-                end
-                else if (rready) begin
+            if (rready) begin
+                rvalid_w = 1'b1;
+                raddr_w = base_addr + total_weight_r + cnt_r;
+                cnt_w = cnt_r + 1;
+                if (cnt_r == cout) begin
                     rvalid_w = 1'b0;
-                    cnt_w = cnt_r + 1;
-                    waiting_w = 0;
+                    state_next = S_DONE;
                 end
             end
         end

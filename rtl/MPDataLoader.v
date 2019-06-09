@@ -23,6 +23,7 @@ module MPDataLoader (
     parameter S_LIF  = 1;
     parameter S_SOF  = 2;
     parameter S_DONE = 3;
+    parameter S_END  = 4;
 
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;
@@ -68,59 +69,65 @@ module MPDataLoader (
 
         case(state)
             S_IDLE: begin
+                rvalid_w = 1'b1;
+                raddr_w = ifaddr;
+                w_w = w_r[0] ? w_r - 1 : w_r + 1;
+                h_w = w_r[0] ? h_r + 1 : h_r;
+                max_w = {1'b1, 15'b0};
+                mpid_w = 1;
+
                 state_next = S_LIF;
-                waiting_w = 0;
-                mpid_w = 0;
             end
             S_LIF: begin
-                if (~waiting_r) begin
-                    rvalid_w = 1'b1;
-                    raddr_w = ifaddr + c_r * H * W + h_r * W + w_r;
-
-                    w_w = w_r[0] ? w_r - 1 : w_r + 1;
-                    h_w = w_r[0] ? h_r + 1 : h_r;
-                    mpid_w = mpid_r + 1;
-
-                    waiting_w = 1;
-                end
-                else if (rready) begin
+                if (rready) begin
                     if ($signed(rdata[15:0]) > $signed(max_r)) begin
                         max_w = rdata;
                     end
 
                     if (mpid_r == 4) begin
+                        rvalid_w = 1'b0;
+                        wvalid_w = 1'b1;
+                        waddr_w = ofaddr + c_r * (Hcrop / 2) * (Wcrop / 2) + (h_r / 2 - 1) * (Wcrop / 2) + (w_r / 2);
+                        w_w = (w_r == Wcrop - 2) ? 0 : w_r + 2;
+                        h_w = (w_r == Wcrop - 2) ? ((h_r == Hcrop) ? 0 : h_r) : h_r - 2;
+                        c_w = ((w_r == Wcrop - 2) && (h_r == Hcrop )) ? c_r + 1 : c_r;
+                        wdata_w = {16'b0, max_w};
+                        max_w = {1'b1, 15'b0};
                         mpid_w = 0;
                         state_next = S_SOF;
                     end
-                    rvalid_w = 1'b0;
-                    waiting_w = 0;
+                    else begin
+                        rvalid_w = 1'b1;
+                        raddr_w = ifaddr + c_r * H * W + h_r * W + w_r;
+
+                        w_w = w_r[0] ? w_r - 1 : w_r + 1;
+                        h_w = w_r[0] ? h_r + 1 : h_r;
+                        mpid_w = mpid_r + 1;
+                    end
                 end
             end
-            S_SOF: begin
-                if (~waiting_r) begin
-                    wvalid_w = 1'b1;
-                    waddr_w = ofaddr + c_r * (Hcrop / 2) * (Wcrop / 2) + (h_r / 2 - 1) * (Wcrop / 2) + (w_r / 2);
-                    w_w = (w_r == Wcrop - 2) ? 0 : w_r + 2;
-                    h_w = (w_r == Wcrop - 2) ? ((h_r == Hcrop) ? 0 : h_r) : h_r - 2;
-                    c_w = ((w_r == Wcrop - 2) && (h_r == Hcrop )) ? c_r + 1 : c_r;
-                    wdata_w = {16'b0, max_r};
-                    max_w = {1'b1, 15'b0};
-                    waiting_w = 1;
-                end
-                else if (wready) begin
+            S_SOF: begin 
+                if (wready) begin
                     wvalid_w = 1'b0;
                     cnt_w = cnt_r + 1;
-                    waiting_w = 0;
                     if (cnt_r == C * Hcrop * Wcrop / 4) begin
+                        rvalid_w = 1'b0;
                         state_next = S_DONE;
                     end
                     else begin
+                        rvalid_w = 1'b1;
+                        raddr_w = ifaddr + c_r * H * W + h_r * W + w_r;
+                        w_w = w_r[0] ? w_r - 1 : w_r + 1;
+                        h_w = w_r[0] ? h_r + 1 : h_r;
+                        mpid_w = 1;
                         state_next = S_LIF;
                     end                    
                 end
             end
             S_DONE: begin
-                state_next = S_IDLE;
+                state_next = S_END;
+            end
+            S_END: begin
             end
         endcase
     end

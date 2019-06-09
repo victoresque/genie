@@ -1,0 +1,175 @@
+// conv
+cfgl, conv, relu, bias
+cfgcv, 3, 16, 3
+cfgcvif, 32, 32
+cvaif, 29764
+cvaw, 0
+cvaof, 44164
+cvselpe, 0
+cvcfgpe, 12, 12, 12
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 12, 12, 12
+cvlifp, 0, 10
+cvsofp, 0, 0, 10
+cvcfgpe, 12, 12, 12
+cvlifp, 0, 20
+cvsofp, 0, 0, 20
+cvcfgpe, 12, 12, 12
+cvlifp, 10, 0
+cvsofp, 0, 10, 0
+cvcfgpe, 12, 12, 12
+cvlifp, 10, 10
+cvsofp, 0, 10, 10
+cvcfgpe, 12, 12, 12
+cvlifp, 10, 20
+cvsofp, 0, 10, 20
+cvcfgpe, 12, 12, 12
+cvlifp, 20, 0
+cvsofp, 0, 20, 0
+cvcfgpe, 12, 12, 12
+cvlifp, 20, 10
+cvsofp, 0, 20, 10
+cvcfgpe, 12, 12, 12
+cvlifp, 20, 20
+cvsofp, 0, 20, 20
+cvcfgpe, 4, 12, 12
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+cvcfgpe, 4, 12, 12
+cvlifp, 0, 10
+cvsofp, 12, 0, 10
+cvcfgpe, 4, 12, 12
+cvlifp, 0, 20
+cvsofp, 12, 0, 20
+cvcfgpe, 4, 12, 12
+cvlifp, 10, 0
+cvsofp, 12, 10, 0
+cvcfgpe, 4, 12, 12
+cvlifp, 10, 10
+cvsofp, 12, 10, 10
+cvcfgpe, 4, 12, 12
+cvlifp, 10, 20
+cvsofp, 12, 10, 20
+cvcfgpe, 4, 12, 12
+cvlifp, 20, 0
+cvsofp, 12, 20, 0
+cvcfgpe, 4, 12, 12
+cvlifp, 20, 10
+cvsofp, 12, 20, 10
+cvcfgpe, 4, 12, 12
+cvlifp, 20, 20
+cvsofp, 12, 20, 20
+// maxpool
+cfgl, mp
+cfgcv, 16, 16, 0
+cfgcvif, 30, 30
+mpaif, 44164
+mpsof, 29764
+// conv
+cfgl, conv, relu, bias
+cfgcv, 16, 32, 3
+cfgcvif, 15, 15
+cvaif, 29764
+cvaw, 448
+cvaof, 44164
+cvselpe, 0
+cvcfgpe, 12, 12, 12
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 12, 12, 5
+cvlifp, 0, 10
+cvsofp, 0, 0, 10
+cvcfgpe, 12, 5, 12
+cvlifp, 10, 0
+cvsofp, 0, 10, 0
+cvcfgpe, 12, 5, 5
+cvlifp, 10, 10
+cvsofp, 0, 10, 10
+cvcfgpe, 12, 12, 12
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+cvcfgpe, 12, 12, 5
+cvlifp, 0, 10
+cvsofp, 12, 0, 10
+cvcfgpe, 12, 5, 12
+cvlifp, 10, 0
+cvsofp, 12, 10, 0
+cvcfgpe, 12, 5, 5
+cvlifp, 10, 10
+cvsofp, 12, 10, 10
+cvcfgpe, 8, 12, 12
+cvlwp, 24
+cvlifp, 0, 0
+cvsofp, 24, 0, 0
+cvcfgpe, 8, 12, 5
+cvlifp, 0, 10
+cvsofp, 24, 0, 10
+cvcfgpe, 8, 5, 12
+cvlifp, 10, 0
+cvsofp, 24, 10, 0
+cvcfgpe, 8, 5, 5
+cvlifp, 10, 10
+cvsofp, 24, 10, 10
+// maxpool
+cfgl, mp
+cfgcv, 32, 32, 0
+cfgcvif, 13, 13
+mpaif, 44164
+mpsof, 29764
+// conv
+cfgl, conv, relu, bias
+cfgcv, 32, 64, 3
+cfgcvif, 6, 6
+cvaif, 29764
+cvaw, 5088
+cvaof, 44164
+cvselpe, 0
+cvcfgpe, 12, 6, 6
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+cvcfgpe, 12, 6, 6
+cvlwp, 12
+cvlifp, 0, 0
+cvsofp, 12, 0, 0
+cvcfgpe, 12, 6, 6
+cvlwp, 24
+cvlifp, 0, 0
+cvsofp, 24, 0, 0
+cvcfgpe, 12, 6, 6
+cvlwp, 36
+cvlifp, 0, 0
+cvsofp, 36, 0, 0
+cvcfgpe, 12, 6, 6
+cvlwp, 48
+cvlifp, 0, 0
+cvsofp, 48, 0, 0
+cvcfgpe, 4, 6, 6
+cvlwp, 60
+cvlifp, 0, 0
+cvsofp, 60, 0, 0
+// conv
+cfgl, conv, noact, bias
+cfgcv, 64, 10, 3
+cfgcvif, 4, 4
+cvaif, 44164
+cvaw, 23584
+cvaof, 29764
+cvselpe, 0
+cvcfgpe, 10, 4, 4
+cvlwp, 0
+cvlifp, 0, 0
+cvsofp, 0, 0, 0
+// fc
+cfgl, fc, relu, bias
+cfgfc, 40, 10
+fclif, 29764
+fclw, 29354
+fcsof, 44164
+// end of calculation, out feature @44164
+eoc

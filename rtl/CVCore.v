@@ -1,3 +1,6 @@
+`include "constants.v"
+
+
 module BehavCVCore (
     input         clk,
     input         rst,
@@ -7,6 +10,7 @@ module BehavCVCore (
     input         dout_ready,
     output [15:0] dout_data,
     input         has_bias,
+    input   [4:0] act_type,
 
     input         load_weight,
     input         load_input,
@@ -41,8 +45,10 @@ module BehavCVCore (
 
     integer idx, h, w, i, o, addr, ifidx;
     reg  [31:0] sum;
+    reg         calculating;
 
-    assign dout_data = psum[addr][15] ? 0 : psum[addr];
+    // TODO: move activation to upper level
+    assign dout_data = (act_type == `ACT_RELU) ? (psum[addr][15] ? 0 : psum[addr]) : psum[addr];
 
     always @ (*) begin  
         sum = 0;
@@ -81,6 +87,7 @@ module BehavCVCore (
             addr <= 0;
             calc_done <= 0;
             dout_valid <= 0;
+            calculating <= 0;
             state <= S_IDLE;
         end
         else begin
@@ -143,6 +150,8 @@ module BehavCVCore (
                     end
                 end
                 S_CALC: begin
+                    calculating <= 1;
+
                     psum[addr] <= sum[25:10];
 
                     w <= (w == (Wext - K + 1)) ? 1 : w + 1;
@@ -161,6 +170,8 @@ module BehavCVCore (
                     end
                 end
                 S_OUTPUT: begin
+                    calculating <= 0;
+
                     dout_valid <= 1;
 
                     calc_done <= 0;

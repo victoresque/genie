@@ -6,16 +6,21 @@ from torchvision import datasets, transforms
 
 
 if __name__ == '__main__':
-    mnist_data = datasets.MNIST(
+    # data = datasets.MNIST(
+    #     '../data', train=True, download=True, transform=transforms.ToTensor())
+
+    data = datasets.CIFAR10(
         '../data', train=True, download=True, transform=transforms.ToTensor())
 
     data_loader = torch.utils.data.DataLoader(
-        mnist_data, batch_size=1, shuffle=True, num_workers=1)
+        data, batch_size=1, shuffle=True, num_workers=1)
 
     for img, label in data_loader:
         img = img.data.numpy().flatten()
         label = label.data.numpy().flatten()
         break
+
+    print(img)
 
     S, M, F = 1, 5, 10
     ext_mem_size = 67108864

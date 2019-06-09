@@ -97,6 +97,7 @@ module Genie (
         .cin(fc_cin),
         .cout(fc_cout),
         .has_bias(has_bias),
+        .act_type(act_type),
         .din_valid(rready),
         .din_data(rdata[15:0]),
         .dout_valid(fc_dout_valid),
@@ -189,6 +190,7 @@ module Genie (
         .dout_ready(cv_core_dout_ready),
         .dout_data(cv_core_dout_data),
         .has_bias(has_bias),
+        .act_type(act_type),
 
         .load_weight(cv_core_load_weight),
         .load_input(cv_core_load_input),

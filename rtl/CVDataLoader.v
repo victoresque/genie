@@ -97,79 +97,73 @@ module CVDataLoader (
 
         case(state)
             S_IDLE: begin
+                h_w = 0;
+                w_w = 0;
+                o_w = 0;
+                i_w = 0;
+                rvalid_w = 1'b0;
+                wvalid_w = 1'b0;
+                waiting_w = 0;
+                cnt_w = 0;
                 if (load_weight) begin
+                    rvalid_w = 1'b1;
+                    raddr_w = weaddr + Oori * I * K * K;
+                    cnt_w = 1;
                     state_next = S_LW;
                 end
                 else if (load_input) begin
+                    rvalid_w = 1'b1;
+                    raddr_w = ifaddr + i_r * H * W + (Hori + h_r) * W + (Wori + w_r);
+                    w_w = (w_r == Wext - 1) ? 0 : w_r + 1;
+                    h_w = (w_r == Wext - 1) ? ((h_r == (Hext - 1)) ? 0 : h_r + 1) : h_r;
+                    i_w = ((w_r == Wext - 1) && (h_r == (Hext - 1))) ? i_r + 1 : i_r;
+                    cnt_w = 1;
                     state_next = S_LIF;
                 end
                 else if (store_output && core_calc_done) begin
                     state_next = S_SOF;
                 end
-                h_w = 0;
-                w_w = 0;
-                o_w = 0;
-                i_w = 0;
-                waiting_w = 0;
-                cnt_w = 0;
             end
             S_LW: begin
-                if (cnt_r == Oext * I * K * K) begin
-                    if (has_bias) begin
-                        cnt_w = 0;
-                        state_next = S_LB;
-                    end
-                    else begin
-                        state_next = S_DONE;
-                    end
-                end
-                else begin
-                    if (~waiting_r) begin
-                        rvalid_w = 1'b1;
-                        raddr_w = weaddr + Oori * I * K * K + cnt_r;
-                        waiting_w = 1;
-                    end
-                    else if (rready) begin
-                        rvalid_w = 1'b0;
-                        cnt_w = cnt_r + 1;
-                        waiting_w = 0;
+                if (rready) begin
+                    rvalid_w = 1'b1;
+                    raddr_w = weaddr + Oori * I * K * K + cnt_r;
+                    cnt_w = cnt_r + 1;
+                    if (cnt_r == Oext * I * K * K) begin
+                        if (has_bias) begin
+                            raddr_w = weaddr + O * I * K * K + Oori;
+                            cnt_w = 1;
+                            state_next = S_LB;
+                        end
+                        else begin
+                            rvalid_w = 1'b0;
+                            state_next = S_DONE;
+                        end
                     end
                 end
             end
             S_LB: begin
-                if (cnt_r == Oext) begin
-                    state_next = S_DONE;
-                end
-                else begin
-                    if (~waiting_r) begin
-                        rvalid_w = 1'b1;
-                        raddr_w = weaddr + O * I * K * K + (Oori + cnt_r);
-                        waiting_w = 1;
-                    end
-                    else if (rready) begin
+                if (rready) begin
+                    rvalid_w = 1'b1;
+                    raddr_w = weaddr + O * I * K * K + (Oori + cnt_r);
+                    cnt_w = cnt_r + 1;
+                    if (cnt_r == Oext) begin
                         rvalid_w = 1'b0;
-                        cnt_w = cnt_r + 1;
-                        waiting_w = 0;
+                        state_next = S_DONE;
                     end
                 end
             end
             S_LIF: begin
-                if (cnt_r == I * Hext * Wext) begin
-                    state_next = S_DONE;
-                end
-                else begin
-                    if (~waiting_r) begin
-                        rvalid_w = 1'b1;
-                        raddr_w = ifaddr + i_r * H * W + (Hori + h_r) * W + (Wori + w_r);
-                        w_w = (w_r == Wext - 1) ? 0 : w_r + 1;
-                        h_w = (w_r == Wext - 1) ? ((h_r == (Hext - 1)) ? 0 : h_r + 1) : h_r;
-                        i_w = ((w_r == Wext - 1) && (h_r == (Hext - 1))) ? i_r + 1 : i_r;
-                        waiting_w = 1;
-                    end
-                    else if (rready) begin
+                if (rready) begin
+                    rvalid_w = 1'b1;
+                    raddr_w = ifaddr + i_r * H * W + (Hori + h_r) * W + (Wori + w_r);
+                    w_w = (w_r == Wext - 1) ? 0 : w_r + 1;
+                    h_w = (w_r == Wext - 1) ? ((h_r == (Hext - 1)) ? 0 : h_r + 1) : h_r;
+                    i_w = ((w_r == Wext - 1) && (h_r == (Hext - 1))) ? i_r + 1 : i_r;
+                    cnt_w = cnt_r + 1;
+                    if (cnt_r == I * Hext * Wext) begin
                         rvalid_w = 1'b0;
-                        cnt_w = cnt_r + 1;
-                        waiting_w = 0;
+                        state_next = S_DONE;
                     end
                 end
             end
