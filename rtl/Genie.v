@@ -119,7 +119,6 @@ module Genie (
     wire        cv_core_load_weight;
     wire        cv_core_load_input;
     wire        cv_core_store_output;
-    wire        cv_core_calc_done;
     wire        cv_core_idle;
 
     CVDataLoader u_CVDataLoader (
@@ -156,7 +155,6 @@ module Genie (
         .core_load_weight(cv_core_load_weight),
         .core_load_input(cv_core_load_input),
         .core_store_output(cv_core_store_output),
-        .core_calc_done(cv_core_calc_done),
         .core_idle(cv_core_idle),
 
         .wvalid(wvalid_[`LAYER_CV]),
@@ -171,8 +169,6 @@ module Genie (
         .done(cv_done)
     );
 
-
-    // TODO: multiple PE arbitration
     BehavCVCore u_BehavCVCore (
         .clk(clk),
         .rst(cv_rst),
@@ -187,7 +183,6 @@ module Genie (
         .load_weight(cv_core_load_weight),
         .load_input(cv_core_load_input),
         .store_output(cv_core_store_output),
-        .calc_done(cv_core_calc_done),
         .idle(cv_core_idle),
 
         .K(cv_K),
@@ -259,6 +254,7 @@ module Genie (
         .cv_done(cv_done),
 
         .cv_peid(cv_peid),
+        .cv_pe_idle(cv_core_idle),
         .cv_broadcast(cv_broadcast),
         .cv_pecfg(cv_pecfg),
         .cv_Iext(cv_Iext),

@@ -32,6 +32,7 @@ module Decoder (
     input         cv_done,
 
     output  [7:0] cv_peid,
+    input         cv_pe_idle,
     output        cv_broadcast,
     output        cv_pecfg,
     output [12:0] cv_Iext,
@@ -206,13 +207,25 @@ module Decoder (
                 cv_peid_w = idata[7:0];
                 state_next = S_CVSELPE; end
             `OP_CVCFGEXT: begin
-                if (idata[26]) cv_ioext_w = idata[25:0];
-                else           cv_hwext_w = idata[25:0];
-                state_next = S_CVCFGEXT; end
+                if (cv_pe_idle) begin
+                    if (idata[26]) cv_ioext_w = idata[25:0];
+                    else           cv_hwext_w = idata[25:0];
+                    state_next = S_CVCFGEXT; 
+                end
+                else begin
+                    iaddr_w = iaddr_r;
+                end
+            end
             `OP_CVCFGORI: begin
-                if (idata[26]) cv_ioori_w = idata[25:0];
-                else           cv_hwori_w = idata[25:0];
-                state_next = S_CVCFGORI; end
+                if (cv_pe_idle) begin
+                    if (idata[26]) cv_ioori_w = idata[25:0];
+                    else           cv_hwori_w = idata[25:0];
+                    state_next = S_CVCFGORI; 
+                end
+                else begin
+                    iaddr_w = iaddr_r;
+                end
+            end
             `OP_CVLIFP: begin
                 state_next = S_CVLIFP; end
             `OP_CVLWP: begin

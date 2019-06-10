@@ -31,7 +31,6 @@ module CVDataLoader (
     output        core_load_weight,
     output        core_load_input,
     output        core_store_output,
-    input         core_calc_done,
     input         core_idle,
 
     output        wvalid,
@@ -52,9 +51,6 @@ module CVDataLoader (
     parameter S_LIF  = 3;
     parameter S_SOF  = 4;
     parameter S_DONE = 5;
-
-    parameter S_WAITCALC = 6;
-
 
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;
@@ -126,7 +122,7 @@ module CVDataLoader (
                     cnt_w = 1;
                     state_next = S_LIF;
                 end
-                else if (store_output) begin
+                else if (store_output && core_idle) begin
                     state_next = S_SOF;
                 end
             end
@@ -169,9 +165,7 @@ module CVDataLoader (
                     cnt_w = cnt_r + 1;
                     if (cnt_r == Iext * Hext * Wext) begin
                         rvalid_w = 1'b0;
-
-                        // TODO: temporary workaround
-                        state_next = S_WAITCALC;
+                        state_next = S_DONE;
                     end
                 end
             end
@@ -201,11 +195,6 @@ module CVDataLoader (
             end
             S_DONE: begin
                 state_next = S_IDLE;
-            end
-            S_WAITCALC: begin
-                if(core_calc_done) begin
-                    state_next = S_DONE;
-                end
             end
         endcase
     end

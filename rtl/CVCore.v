@@ -15,10 +15,8 @@ module BehavCVCore (
     input         load_weight,
     input         load_input,
     input         store_output,
-    output        calc_done,
     output        idle,
 
-    input         cfg,
     input   [4:0] K,
     input  [10:0] I,
     input  [10:0] Iori,
@@ -28,8 +26,6 @@ module BehavCVCore (
     input  [10:0] Wext
 );
     reg        dout_valid;
-    reg        calc_done;
-
     reg        waiting;
 
     reg  [3:0] state, state_next;
@@ -50,7 +46,8 @@ module BehavCVCore (
 
     integer idx, h, w, i, o, addr, ifidx;
     reg  [31:0] sum;
-    reg         calculating;
+    wire        calculating;
+    assign calculating = state == S_CALC;
 
     // TODO: move activation to upper level
     assign dout_data = (act_type == `ACT_RELU) ? (psum[addr][15] ? 0 : psum[addr]) : psum[addr];
@@ -94,9 +91,7 @@ module BehavCVCore (
             for (idx = 0; idx < 32768; idx = idx + 1) psum[idx] <= 32'bx;
             for (idx = 0; idx < 1024; idx = idx + 1) bias[idx] <= 32'bx;
             addr <= 0;
-            calc_done <= 0;
             dout_valid <= 0;
-            calculating <= 0;
             state <= S_IDLE;
         end
         else begin
@@ -159,8 +154,6 @@ module BehavCVCore (
                     end
                 end
                 S_CALC: begin
-                    calculating <= 1;
-
                     psum[addr] <= sum[25:10];
 
                     w <= (w == (Wext - K + 1)) ? 1 : w + 1;
@@ -169,7 +162,6 @@ module BehavCVCore (
 
                     if (addr == Oext * (Hext - K + 1) * (Wext - K + 1) - 1) begin
                         addr <= 0;
-                        calc_done <= 1;
                         i <= 0;
                         o <= 0;
                         state <= S_DONE;
@@ -179,8 +171,6 @@ module BehavCVCore (
                     end
                 end
                 S_OUTPUT: begin
-                    calculating <= 0;
-
                     dout_valid <= 1;
 
                     if (dout_ready) begin
@@ -194,7 +184,6 @@ module BehavCVCore (
                     end
                 end
                 S_DONE: begin
-                    calc_done <= 0;
                     state <= S_IDLE;
                 end
             endcase
