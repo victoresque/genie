@@ -9,10 +9,11 @@
 `define OP_CVAW     14
 `define OP_CVAOF    15
 `define OP_CVSELPE  16
-`define OP_CVCFGPE  17
-`define OP_CVLIFP   18
-`define OP_CVLWP    19
-`define OP_CVSOFP   20
+`define OP_CVCFGEXT 17
+`define OP_CVCFGORI 18
+`define OP_CVLIFP   19
+`define OP_CVLWP    20
+`define OP_CVSOFP   21
 `define OP_MPAIF    28
 `define OP_MPSOF    29
 `define OP_EOC      31

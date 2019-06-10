@@ -5,14 +5,11 @@ module FCDataLoader (
     input  [11:0] cin,
     input  [11:0] cout,
     input         has_bias,
+    input   [4:0] act_type,
 
     input         lif_start,
     input         lw_start,
     input         sof_start,
-
-    input         fc_dout_valid,
-    output        fc_dout_ready,
-    input  [15:0] fc_dout_data,
 
     input  [26:0] base_addr,
     output        wvalid,
@@ -49,12 +46,27 @@ module FCDataLoader (
     assign wdata = wdata_r;
     assign done = state == S_DONE;
 
+    wire        fc_dout_valid;
+    wire [15:0] fc_dout_data;
+    reg         fc_dout_ready_r, fc_dout_ready_w;
+
+    FCCore u_FCCore (
+        .clk(clk),
+        .rst(rst),
+        .cin(cin),
+        .cout(cout),
+        .has_bias(has_bias),
+        .act_type(act_type),
+        .din_valid(rready),
+        .din_data(rdata[15:0]),
+        .dout_valid(fc_dout_valid),
+        .dout_ready(fc_dout_ready_r),
+        .dout_data(fc_dout_data)
+    );
+
     reg  [23:0] total_weight_r;
     wire [23:0] total_weight_w;
     assign total_weight_w = cin * cout;
-
-    reg         fc_dout_ready_r, fc_dout_ready_w;
-    assign fc_dout_ready = fc_dout_ready_r;
 
     always @ (*) begin
         cnt_w = cnt_r;

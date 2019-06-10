@@ -1,7 +1,7 @@
 `timescale 1ns/10ps
 `define CYCLE       10.0
 `define HCYCLE      (`CYCLE/2)
-`define MAX_CYCLE   100000000
+`define MAX_CYCLE   10000000
 `define RST_DELAY   (5.5*`CYCLE)
 
 

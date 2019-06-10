@@ -57,9 +57,6 @@ module Genie (
     wire        fc_lw_start;
     wire        fc_sof_start;
     wire        fc_done;
-    wire        fc_dout_valid;
-    wire        fc_dout_ready;
-    wire [15:0] fc_dout_data;
     wire [26:0] fc_base_addr;
 
     FCDataLoader u_FCDataLoader (
@@ -69,14 +66,11 @@ module Genie (
         .cin(fc_cin),
         .cout(fc_cout),
         .has_bias(has_bias),
+        .act_type(act_type),
 
         .lif_start(fc_lif_start),
         .lw_start(fc_lw_start),
         .sof_start(fc_sof_start),
-
-        .fc_dout_valid(fc_dout_valid),
-        .fc_dout_ready(fc_dout_ready),
-        .fc_dout_data(fc_dout_data),
 
         .base_addr(fc_base_addr),
         .wvalid(wvalid_[`LAYER_FC]),
@@ -91,36 +85,34 @@ module Genie (
         .done(fc_done)
     );
 
-    FCCore u_FCCore (
-        .clk(clk),
-        .rst(fc_rst),
-        .cin(fc_cin),
-        .cout(fc_cout),
-        .has_bias(has_bias),
-        .act_type(act_type),
-        .din_valid(rready),
-        .din_data(rdata[15:0]),
-        .dout_valid(fc_dout_valid),
-        .dout_ready(fc_dout_ready),
-        .dout_data(fc_dout_data)
-    );
-
     wire        cv_rst;
     wire [10:0] cv_I;
     wire [10:0] cv_O;
     wire  [4:0] cv_K;
-    wire [10:0] cv_H;
-    wire [10:0] cv_W;
-    wire [10:0] cv_Oext;
-    wire  [7:0] cv_Hext;
-    wire  [7:0] cv_Wext;
-    wire [10:0] cv_Oori;
-    wire  [7:0] cv_Hori;
-    wire  [7:0] cv_Wori;
+    wire [12:0] cv_H;     // TODO: bit width change to 13
+    wire [12:0] cv_W;     // TODO: bit width change to 13
     wire [26:0] cv_ifaddr;
     wire [26:0] cv_weaddr;
     wire [26:0] cv_ofaddr;
+    wire        cv_load_weight;
+    wire        cv_load_input;
+    wire        cv_store_output;
+    wire        cv_done;
+
     wire  [4:0] cv_peid;
+    wire        cv_broadcast;
+    wire        cv_pecfg;
+    wire [12:0] cv_Iext;  // TODO: bit width change to 13
+    wire [12:0] cv_Oext;  // TODO: bit width change to 13
+    wire [12:0] cv_Hext;  // TODO: bit width change to 13
+    wire [12:0] cv_Wext;  // TODO: bit width change to 13
+    wire [12:0] cv_Iori;  // TODO: bit width change to 13
+    wire [12:0] cv_Oori;  // TODO: bit width change to 13
+    wire [12:0] cv_Hori;  // TODO: bit width change to 13
+    wire [12:0] cv_Wori;  // TODO: bit width change to 13
+
+    // TODO: rename CVDataLoader to CVEngine
+    // TODO: move cv core inside CVProcessor
     wire        cv_core_dout_valid;
     wire        cv_core_dout_ready;
     wire [15:0] cv_core_dout_data;
@@ -128,10 +120,7 @@ module Genie (
     wire        cv_core_load_input;
     wire        cv_core_store_output;
     wire        cv_core_calc_done;
-    wire        cv_load_weight;
-    wire        cv_load_input;
-    wire        cv_store_output;
-    wire        cv_done;
+    wire        cv_core_idle;
 
     CVDataLoader u_CVDataLoader (
         .clk(clk),
@@ -142,9 +131,11 @@ module Genie (
         .K(cv_K),
         .H(cv_H),
         .W(cv_W),
+        .Iext(cv_Iext),
         .Oext(cv_Oext),
         .Hext(cv_Hext),
         .Wext(cv_Wext),
+        .Iori(cv_Iori),
         .Oori(cv_Oori),
         .Hori(cv_Hori),
         .Wori(cv_Wori),
@@ -166,6 +157,7 @@ module Genie (
         .core_load_input(cv_core_load_input),
         .core_store_output(cv_core_store_output),
         .core_calc_done(cv_core_calc_done),
+        .core_idle(cv_core_idle),
 
         .wvalid(wvalid_[`LAYER_CV]),
         .wready(wready_[`LAYER_CV]),
@@ -196,9 +188,12 @@ module Genie (
         .load_input(cv_core_load_input),
         .store_output(cv_core_store_output),
         .calc_done(cv_core_calc_done),
+        .idle(cv_core_idle),
 
         .K(cv_K),
-        .Iext(cv_I),
+        .I(cv_I),
+        .Iori(cv_Iori),
+        .Iext(cv_Iext),
         .Oext(cv_Oext),
         .Hext(cv_Hext),
         .Wext(cv_Wext)
@@ -250,26 +245,30 @@ module Genie (
         .fc_done(fc_done),
 
         .cv_rst(cv_rst),
-        .cv_peid(cv_peid),
         .cv_I(cv_I),
         .cv_O(cv_O),
         .cv_K(cv_K),
         .cv_H(cv_H),
         .cv_W(cv_W),
-        .cv_Oext(cv_Oext),
-        .cv_Hext(cv_Hext),
-        .cv_Wext(cv_Wext),
-        .cv_Oori(cv_Oori),
-        .cv_Hori(cv_Hori),
-        .cv_Wori(cv_Wori),
         .cv_ifaddr(cv_ifaddr),
         .cv_weaddr(cv_weaddr),
         .cv_ofaddr(cv_ofaddr),
-        
         .cv_load_weight(cv_load_weight),
         .cv_load_input(cv_load_input),
         .cv_store_output(cv_store_output),
         .cv_done(cv_done),
+
+        .cv_peid(cv_peid),
+        .cv_broadcast(cv_broadcast),
+        .cv_pecfg(cv_pecfg),
+        .cv_Iext(cv_Iext),
+        .cv_Oext(cv_Oext),
+        .cv_Hext(cv_Hext),
+        .cv_Wext(cv_Wext),
+        .cv_Iori(cv_Iori),
+        .cv_Oori(cv_Oori),
+        .cv_Hori(cv_Hori),
+        .cv_Wori(cv_Wori),
 
         .mp_rst(mp_rst),
         .mp_ifaddr(mp_ifaddr),

@@ -16,12 +16,16 @@ module BehavCVCore (
     input         load_input,
     input         store_output,
     output        calc_done,
+    output        idle,
 
+    input         cfg,
     input   [4:0] K,
+    input  [10:0] I,
+    input  [10:0] Iori,
     input  [10:0] Iext,
     input  [10:0] Oext,
-    input   [7:0] Hext,
-    input   [7:0] Wext
+    input  [10:0] Hext,
+    input  [10:0] Wext
 );
     reg        dout_valid;
     reg        calc_done;
@@ -35,8 +39,9 @@ module BehavCVCore (
     parameter S_READ_BIAS   = 3;
     parameter S_CALC        = 4;
     parameter S_OUTPUT      = 5;
-    parameter S_DONE1       = 6;
-    parameter S_DONE2       = 7;
+    parameter S_DONE        = 6;
+
+    assign idle = state == S_IDLE;
     
     reg  [15:0] ifmap[0:32768];
     reg  [15:0] weight[0:32768];
@@ -51,30 +56,34 @@ module BehavCVCore (
     assign dout_data = (act_type == `ACT_RELU) ? (psum[addr][15] ? 0 : psum[addr]) : psum[addr];
 
     always @ (*) begin  
-        sum = 0;
-        for (ifidx = 0; ifidx < Iext; ifidx = ifidx + 1) begin
-            sum = $signed(sum)
-                + $signed(ifmap[ifidx * Hext * Wext + (h-1) * Wext + (w-1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 0 * K + 0])
-                + $signed(ifmap[ifidx * Hext * Wext + (h-0) * Wext + (w-1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 1 * K + 0])
-                + $signed(ifmap[ifidx * Hext * Wext + (h+1) * Wext + (w-1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 2 * K + 0])
-                + $signed(ifmap[ifidx * Hext * Wext + (h-1) * Wext + (w-0)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 0 * K + 1])
-                + $signed(ifmap[ifidx * Hext * Wext + (h-0) * Wext + (w-0)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 1 * K + 1])
-                + $signed(ifmap[ifidx * Hext * Wext + (h+1) * Wext + (w-0)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 2 * K + 1])
-                + $signed(ifmap[ifidx * Hext * Wext + (h-1) * Wext + (w+1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 0 * K + 2])
-                + $signed(ifmap[ifidx * Hext * Wext + (h-0) * Wext + (w+1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 1 * K + 2])
-                + $signed(ifmap[ifidx * Hext * Wext + (h+1) * Wext + (w+1)]) 
-                          * $signed(weight[o * Iext * K * K + ifidx * K * K + 2 * K + 2]);
+        if (Iori == 0) begin
+            if (has_bias) sum = {{6{bias[o][15]}}, bias[o], 10'b0};
+            else          sum = 0;
         end
-        if (has_bias) begin
-            sum = $signed(sum) + $signed({{6{bias[o][15]}}, bias[o], 10'b0});
+        else begin
+            sum = {{6{psum[addr][15]}}, psum[addr][15:0], 10'b0};
+        end
+        
+        for (ifidx = Iori; ifidx < Iori + Iext; ifidx = ifidx + 1) begin
+            sum = $signed(sum)
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-1) * Wext + (w-1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 0 * K + 0])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-0) * Wext + (w-1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 1 * K + 0])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h+1) * Wext + (w-1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 2 * K + 0])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-1) * Wext + (w-0)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 0 * K + 1])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-0) * Wext + (w-0)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 1 * K + 1])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h+1) * Wext + (w-0)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 2 * K + 1])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-1) * Wext + (w+1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 0 * K + 2])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h-0) * Wext + (w+1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 1 * K + 2])
+                + $signed(ifmap[(ifidx - Iori) * Hext * Wext + (h+1) * Wext + (w+1)]) 
+                          * $signed(weight[o * I * K * K + ifidx * K * K + 2 * K + 2]);
         end
     end
 
@@ -107,7 +116,7 @@ module BehavCVCore (
                 S_READ_WEIGHT: begin
                     if (din_valid) begin
                         weight[addr] <= din_data;
-                        if (addr == Oext * Iext * K * K - 1) begin
+                        if (addr == Oext * I * K * K - 1) begin
                             addr <= 0;
                             h <= 1;
                             w <= 1;
@@ -117,7 +126,7 @@ module BehavCVCore (
                                 state <= S_READ_BIAS;
                             end
                             else begin
-                                state <= S_DONE1;
+                                state <= S_DONE;
                             end
                         end
                         else begin
@@ -130,7 +139,7 @@ module BehavCVCore (
                         bias[addr] <= din_data;
                         if (addr == Oext - 1) begin
                             addr <= 0;
-                            state <= S_DONE1;
+                            state <= S_DONE;
                         end
                         else begin
                             addr <= addr + 1;
@@ -163,7 +172,7 @@ module BehavCVCore (
                         calc_done <= 1;
                         i <= 0;
                         o <= 0;
-                        state <= S_DONE1;
+                        state <= S_DONE;
                     end
                     else begin
                         addr <= addr + 1;
@@ -174,21 +183,18 @@ module BehavCVCore (
 
                     dout_valid <= 1;
 
-                    calc_done <= 0;
                     if (dout_ready) begin
                         if (addr == Oext * (Hext - K + 1) * (Wext - K + 1) - 1) begin
                             addr <= 0;
-                            state <= S_DONE1;
+                            state <= S_DONE;
                         end
                         else begin
                             addr <= addr + 1;
                         end
                     end
                 end
-                S_DONE1: begin
-                    state <= S_DONE2;
-                end
-                S_DONE2: begin
+                S_DONE: begin
+                    calc_done <= 0;
                     state <= S_IDLE;
                 end
             endcase

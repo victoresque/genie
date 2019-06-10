@@ -9,7 +9,7 @@
 ## Fully-connected layer
             [  31:27  |   26:16  |   15:5  |     4:0  ]
 * FC configuration
-    cfgfc   [      2  |     cin  |   cout  |          ]
+    cfgfc   [      2  |     cin  |   cout  |          ]     // TODO: assembler, decode, change to cin[25:13], cout[12:0]
 
             [  31:27  |               26:0            ]
 * Load input feature
@@ -24,8 +24,11 @@
             [  31:27  |   26:16  |   15:5  |     4:0  ]
 * Conv2d configuration
     cfgcv   [     11  |     cin  |   cout  |  kernel  ]
+
+
+            [  31:27  |  26 |      25:13  |       12:0  ]
 * Conv2d IF configuration
-    cfgcvif [     12  |  height  |  width  |          ]
+    cfgcvif [     12  |     |     height  |      width  ]
 
             [  31:27  |               26:0            ]
 * Set input feature base address
@@ -34,18 +37,24 @@
     cvaw    [     14  |               addr            ]
 * Set output feature base address
     cvaof   [     15  |               addr            ]
-* PE select
-    cvselpe [     16  |               peid            ]
     
-            [  31:27  |   26:16  |    15:8  |    7:0  ]
-* PE output feature range
-    cvcfgpe [     17  |    oext  |    hext  |   wext  ]
+            [  31:27  |  26:9 |          8  |    7:0  ]
+* PE select
+    cvselpe [     16  |       |  broadcast  |   peid  ]
+
+             [  31:27  |  26 |      25:13  |       12:0  ]
+* Configure PE extents (sel=0: h,w; sel=1: i,o)
+    cvcfgext [     17  | sel |  hext/iext  |  wext/oext  ]
+* Configure PE origins (sel=0: h,w; sel=1: i,o)
+    cvcfgori [     18  | sel |  hori/iori  |  wori/oori  ]
+
+            [  31:27  |               26:0            ]
 * Load input feature partition
-    cvlifp  [     18  |          |    hori  |   wori  ]
+    cvlifp  [     19  |                               ]
 * Load weight partition
-    cvlwp   [     19  |    oori  |          |         ]
+    cvlwp   [     20  |                               ]
 * Store output feature partition
-    cvsofp  [     20  |    oori  |    hori  |   wori  ]
+    cvsofp  [     21  |                               ]
 
 
 ## Max Pooling
@@ -58,47 +67,4 @@
 ## Status
 * End of calculation
     eoc     [     31  |                               ]
-
-
-# Examples
-* DNN example
-```
-// layer 1
-    cfgl, fc, relu, bias
-    cfgfc, 784, 32
-    fclif, 26506
-    fclw, 0
-    fcsof, 27290
-// layer 2
-    cfgl, fc, relu, bias
-    cfgfc, 32, 32
-    fclif, 27290
-    fclw, 25120
-    fcsof, 26506
-// layer 3
-    cfgl, fc, noact, bias
-    cfgfc, 32, 10
-    fclif, 26506
-    fclw, 26176
-    fcsof, 27290
-    eoc
-```
-
-* CNN example
-```
-// conv 1
-    cfgl, conv, relu, bias
-    cfgcv, 1, 16, 3
-    cfgcvif, 28, 28
-    cvaif, 10874
-    cvaw, 0
-    cvaof, 21690
-    cvselpe, 0
-    cvcfgpe, 12, 12, 12
-    cvlifp, 0, 0, 0
-    cvlwp, 0 
-    cfsof, 0, 0, 0
-    cvcfgpe, 12, 12, 12
-
-```
 

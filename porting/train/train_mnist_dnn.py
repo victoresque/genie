@@ -64,7 +64,7 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(
         test_data, batch_size=1, shuffle=False, num_workers=1)
 
-    T = 5
+    T = 3
     model = train(T)
 
     all_param = np.zeros((0, ))

@@ -40,7 +40,7 @@ def assemble(insn):
     elif op == 'cfgcvif':
         opcode = 12
         height, width = int(insn[1]), int(insn[2])
-        return opcode * 2**27 + height * 2**16 + width * 2**5
+        return opcode * 2**27 + height * 2**13 + width
     elif op == 'cvaif':
         opcode = 13
         addr = int(insn[1])
@@ -55,24 +55,30 @@ def assemble(insn):
         return opcode * 2**27 + addr
     elif op == 'cvselpe':
         opcode = 16
-        peid = int(insn[1])
-        return opcode * 2**27 + peid
-    elif op == 'cvcfgpe':
+        broadcast = 1 if insn[1] == 'broadcast' else 0
+        peid = 0 if insn[1] == 'broadcast' else int(insn[1])
+        return opcode * 2**27 + broadcast * 2**8 + peid
+    elif op == 'cvcfgext':
         opcode = 17
-        Oext, Hext, Wext = int(insn[1]), int(insn[2]), int(insn[3])
-        return opcode * 2**27 + Oext * 2**16 + Hext * 2**8 + Wext
-    elif op == 'cvlifp':
+        assert insn[1] == 'hw' or insn[1] == 'io'
+        sel = 0 if insn[1] == 'hw' else 1
+        ext1, ext2 = int(insn[2]), int(insn[3])
+        return opcode * 2**27 + sel * 2**26 + ext1 * 2**13 + ext2
+    elif op == 'cvcfgori':
         opcode = 18
-        Hori, Wori = int(insn[1]), int(insn[2])
-        return opcode * 2**27 + Hori * 2**8 + Wori
-    elif op == 'cvlwp':
+        assert insn[1] == 'hw' or insn[1] == 'io'
+        sel = 0 if insn[1] == 'hw' else 1
+        ori1, ori2 = int(insn[2]), int(insn[3])
+        return opcode * 2**27 + sel * 2**26 + ori1 * 2**13 + ori2
+    elif op == 'cvlifp':
         opcode = 19
-        Oori = int(insn[1])
-        return opcode * 2**27 + Oori * 2**16
-    elif op == 'cvsofp':
+        return opcode * 2**27
+    elif op == 'cvlwp':
         opcode = 20
-        Oori, Hori, Wori = int(insn[1]), int(insn[2]), int(insn[3])
-        return opcode * 2**27 + Oori * 2**16 + Hori * 2**8 + Wori
+        return opcode * 2**27
+    elif op == 'cvsofp':
+        opcode = 21
+        return opcode * 2**27
     elif op == 'mpaif':
         opcode = 28
         addr = int(insn[1])
@@ -140,7 +146,10 @@ if __name__ == '__main__':
 
     C, H, W = 0, 0, 0
 
-    Hp, Wp, S = 12, 12, 12
+    Hp, Wp, Op, Ip = 12, 12, 12, 12
+
+    program.append(
+        ['// start of calculation, input feature @{}'.format(ifbase[0])])
 
     with open(sys.argv[1], 'r') as f:
         for line in f:
@@ -174,9 +183,11 @@ if __name__ == '__main__':
                 program.append(['cvaof', ifbase[1]])
                 program.append(['cvselpe', 0])
                 Hext, Wext = min(H, Hp), min(W, Wp)
-                for s in range(0, O, S):
-                    Oext = min(S, O-s)
-                    wloaded = False
+                for s in range(0, O, Op):
+                    Oext = min(Op, O-s)
+                    program.append(['cvcfgori', 'io', 0, s])
+                    program.append(['cvcfgext', 'io', 0, min(O, s+Op)-s])
+                    program.append(['cvlwp'])
                     for h in range(0, H, Hp-K+1):
                         if H - h < K:
                             break
@@ -184,13 +195,15 @@ if __name__ == '__main__':
                             if W - w < K:
                                 break
                             Oori, Hori, Wori = s, h, w
-                            program.append(['cvcfgpe', Oext,
+                            program.append(['cvcfgori', 'hw', h, w])
+                            program.append(['cvcfgext', 'hw',
                                             min(H, h+Hp)-h, min(W, w+Wp)-w])
-                            if not wloaded:
-                                program.append(['cvlwp', s])
-                                wloaded = True
-                            program.append(['cvlifp', Hori, Wori])
-                            program.append(['cvsofp', Oori, Hori, Wori])
+                            for m in range(0, I, Ip):
+                                program.append(['cvcfgori', 'io', m, s])
+                                program.append(['cvcfgext', 'io',
+                                                min(I, m+Ip)-m, min(O, s+Op)-s])
+                                program.append(['cvlifp'])
+                            program.append(['cvsofp'])
                 H, W = H - K + 1, W - K + 1
                 ifbase[0], ifbase[1] = ifbase[1], ifbase[0]
                 wid += 1

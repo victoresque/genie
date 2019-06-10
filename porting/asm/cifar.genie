@@ -1,3 +1,4 @@
+// start of calculation, input feature @29764
 // conv
 cfgl, conv, relu, bias
 cfgcv, 3, 16, 3
@@ -6,62 +7,120 @@ cvaif, 29764
 cvaw, 0
 cvaof, 44164
 cvselpe, 0
-cvcfgpe, 12, 12, 12
-cvlwp, 0
-cvlifp, 0, 0
-cvsofp, 0, 0, 0
-cvcfgpe, 12, 12, 12
-cvlifp, 0, 10
-cvsofp, 0, 0, 10
-cvcfgpe, 12, 12, 12
-cvlifp, 0, 20
-cvsofp, 0, 0, 20
-cvcfgpe, 12, 12, 12
-cvlifp, 10, 0
-cvsofp, 0, 10, 0
-cvcfgpe, 12, 12, 12
-cvlifp, 10, 10
-cvsofp, 0, 10, 10
-cvcfgpe, 12, 12, 12
-cvlifp, 10, 20
-cvsofp, 0, 10, 20
-cvcfgpe, 12, 12, 12
-cvlifp, 20, 0
-cvsofp, 0, 20, 0
-cvcfgpe, 12, 12, 12
-cvlifp, 20, 10
-cvsofp, 0, 20, 10
-cvcfgpe, 12, 12, 12
-cvlifp, 20, 20
-cvsofp, 0, 20, 20
-cvcfgpe, 4, 12, 12
-cvlwp, 12
-cvlifp, 0, 0
-cvsofp, 12, 0, 0
-cvcfgpe, 4, 12, 12
-cvlifp, 0, 10
-cvsofp, 12, 0, 10
-cvcfgpe, 4, 12, 12
-cvlifp, 0, 20
-cvsofp, 12, 0, 20
-cvcfgpe, 4, 12, 12
-cvlifp, 10, 0
-cvsofp, 12, 10, 0
-cvcfgpe, 4, 12, 12
-cvlifp, 10, 10
-cvsofp, 12, 10, 10
-cvcfgpe, 4, 12, 12
-cvlifp, 10, 20
-cvsofp, 12, 10, 20
-cvcfgpe, 4, 12, 12
-cvlifp, 20, 0
-cvsofp, 12, 20, 0
-cvcfgpe, 4, 12, 12
-cvlifp, 20, 10
-cvsofp, 12, 20, 10
-cvcfgpe, 4, 12, 12
-cvlifp, 20, 20
-cvsofp, 12, 20, 20
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 3, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 10
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 20, 20
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 3, 4
+cvlifp
+cvsofp
 // maxpool
 cfgl, mp
 cfgcv, 16, 16, 0
@@ -76,45 +135,123 @@ cvaif, 29764
 cvaw, 448
 cvaof, 44164
 cvselpe, 0
-cvcfgpe, 12, 12, 12
-cvlwp, 0
-cvlifp, 0, 0
-cvsofp, 0, 0, 0
-cvcfgpe, 12, 12, 5
-cvlifp, 0, 10
-cvsofp, 0, 0, 10
-cvcfgpe, 12, 5, 12
-cvlifp, 10, 0
-cvsofp, 0, 10, 0
-cvcfgpe, 12, 5, 5
-cvlifp, 10, 10
-cvsofp, 0, 10, 10
-cvcfgpe, 12, 12, 12
-cvlwp, 12
-cvlifp, 0, 0
-cvsofp, 12, 0, 0
-cvcfgpe, 12, 12, 5
-cvlifp, 0, 10
-cvsofp, 12, 0, 10
-cvcfgpe, 12, 5, 12
-cvlifp, 10, 0
-cvsofp, 12, 10, 0
-cvcfgpe, 12, 5, 5
-cvlifp, 10, 10
-cvsofp, 12, 10, 10
-cvcfgpe, 8, 12, 12
-cvlwp, 24
-cvlifp, 0, 0
-cvsofp, 24, 0, 0
-cvcfgpe, 8, 12, 5
-cvlifp, 0, 10
-cvsofp, 24, 0, 10
-cvcfgpe, 8, 5, 12
-cvlifp, 10, 0
-cvsofp, 24, 10, 0
-cvcfgpe, 8, 5, 5
-cvlifp, 10, 10
-cvsofp, 24, 10, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 10
+cvcfgext, hw, 12, 5
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 0
+cvcfgext, hw, 5, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 10
+cvcfgext, hw, 5, 5
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 10
+cvcfgext, hw, 12, 5
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 0
+cvcfgext, hw, 5, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 10
+cvcfgext, hw, 5, 5
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 8
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 0, 10
+cvcfgext, hw, 12, 5
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 0
+cvcfgext, hw, 5, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 10, 10
+cvcfgext, hw, 5, 5
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
 // maxpool
 cfgl, mp
 cfgcv, 32, 32, 0
@@ -129,30 +266,96 @@ cvaif, 29764
 cvaw, 5088
 cvaof, 44164
 cvselpe, 0
-cvcfgpe, 12, 6, 6
-cvlwp, 0
-cvlifp, 0, 0
-cvsofp, 0, 0, 0
-cvcfgpe, 12, 6, 6
-cvlwp, 12
-cvlifp, 0, 0
-cvsofp, 12, 0, 0
-cvcfgpe, 12, 6, 6
-cvlwp, 24
-cvlifp, 0, 0
-cvsofp, 24, 0, 0
-cvcfgpe, 12, 6, 6
-cvlwp, 36
-cvlifp, 0, 0
-cvsofp, 36, 0, 0
-cvcfgpe, 12, 6, 6
-cvlwp, 48
-cvlifp, 0, 0
-cvsofp, 48, 0, 0
-cvcfgpe, 4, 6, 6
-cvlwp, 60
-cvlifp, 0, 0
-cvsofp, 60, 0, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 36
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 36
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 48
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 48
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 60
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 24, 60
+cvcfgext, io, 8, 4
+cvlifp
+cvsofp
 // conv
 cfgl, conv, noact, bias
 cfgcv, 64, 10, 3
@@ -161,10 +364,30 @@ cvaif, 44164
 cvaw, 23584
 cvaof, 29764
 cvselpe, 0
-cvcfgpe, 10, 4, 4
-cvlwp, 0
-cvlifp, 0, 0
-cvsofp, 0, 0, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 10
+cvlwp
+cvcfgori, hw, 0, 0
+cvcfgext, hw, 4, 4
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 10
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 10
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 12, 10
+cvlifp
+cvcfgori, io, 36, 0
+cvcfgext, io, 12, 10
+cvlifp
+cvcfgori, io, 48, 0
+cvcfgext, io, 12, 10
+cvlifp
+cvcfgori, io, 60, 0
+cvcfgext, io, 4, 10
+cvlifp
+cvsofp
 // fc
 cfgl, fc, relu, bias
 cfgfc, 40, 10
