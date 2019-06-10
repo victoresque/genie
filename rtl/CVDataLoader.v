@@ -20,18 +20,18 @@ module CVDataLoader (
     input  [26:0] weaddr,
     input  [26:0] ofaddr,
 
-    input         core_dout_valid,
-    output        core_dout_ready,
-    input  [15:0] core_dout_data,
+    input         pe_dout_valid,
+    output        pe_dout_ready,
+    input  [15:0] pe_dout_data,
 
     input         load_weight,
     input         load_input,
     input         store_output,
 
-    output        core_load_weight,
-    output        core_load_input,
-    output        core_store_output,
-    input         core_idle,
+    output        pe_load_weight,
+    output        pe_load_input,
+    output        pe_store_output,
+    input         pe_idle,
 
     output        wvalid,
     input         wready,
@@ -66,11 +66,11 @@ module CVDataLoader (
     reg   [7:0] w_w, w_r;
     reg  [10:0] o_w, o_r;
     reg  [10:0] i_w, i_r;
-    reg         core_dout_ready_w, core_dout_ready_r;
+    reg         pe_dout_ready_w, pe_dout_ready_r;
 
     assign Hout = Hext - K + 1;
     assign Wout = Wext - K + 1;
-    assign core_dout_ready = core_dout_ready_w;
+    assign pe_dout_ready = pe_dout_ready_w;
     
     assign waddr = waddr_r;
     assign raddr = raddr_r;
@@ -78,9 +78,9 @@ module CVDataLoader (
     assign rvalid = rvalid_r;
     assign wdata = wdata_r;
     assign done = state == S_DONE;
-    assign core_load_weight = state == S_LW;
-    assign core_load_input = state == S_LIF;
-    assign core_store_output = state == S_SOF;
+    assign pe_load_weight = state == S_LW;
+    assign pe_load_input = state == S_LIF;
+    assign pe_store_output = state == S_SOF;
 
     always @ (*) begin
         cnt_w = cnt_r;
@@ -90,7 +90,7 @@ module CVDataLoader (
         rvalid_w = rvalid_r;
         wdata_w = wdata_r;
         waiting_w = waiting_r;
-        core_dout_ready_w = 1'b0;
+        pe_dout_ready_w = 1'b0;
         h_w = h_r;
         w_w = w_r;
         o_w = o_r;
@@ -107,13 +107,13 @@ module CVDataLoader (
                 wvalid_w = 1'b0;
                 waiting_w = 0;
                 cnt_w = 0;
-                if (load_weight && core_idle) begin
+                if (load_weight && pe_idle) begin
                     rvalid_w = 1'b1;
                     raddr_w = weaddr + Oori * I * K * K;
                     cnt_w = 1;
                     state_next = S_LW;
                 end
-                else if (load_input && core_idle) begin
+                else if (load_input && pe_idle) begin
                     rvalid_w = 1'b1;
                     raddr_w = ifaddr + (Iori + i_r) * H * W + (Hori + h_r) * W + (Wori + w_r);
                     w_w = (w_r == Wext - 1) ? 0 : w_r + 1;
@@ -122,7 +122,7 @@ module CVDataLoader (
                     cnt_w = 1;
                     state_next = S_LIF;
                 end
-                else if (store_output && core_idle) begin
+                else if (store_output && pe_idle) begin
                     state_next = S_SOF;
                 end
             end
@@ -175,20 +175,20 @@ module CVDataLoader (
                 end
                 else begin
                     if (~waiting_r) begin
-                        if (core_dout_valid) begin
+                        if (pe_dout_valid) begin
                             wvalid_w = 1'b1;
                             waddr_w = ofaddr + (Oori + o_r) * (H - K + 1) * (W - K + 1) + (Hori + h_r) * (W - K + 1) + (Wori + w_r);
                             w_w = (w_r == Wout - 1) ? 0 : w_r + 1;
                             h_w = (w_r == Wout - 1) ? ((h_r == (Hout - 1)) ? 0 : h_r + 1) : h_r;
                             o_w = ((w_r == Wout - 1) && (h_r == (Hout - 1))) ? o_r + 1 : o_r;
-                            wdata_w = {16'b0, core_dout_data};
+                            wdata_w = {16'b0, pe_dout_data};
                             waiting_w = 1;
                         end
                     end
                     else if (wready) begin
                         wvalid_w = 1'b0;
                         cnt_w = cnt_r + 1;
-                        core_dout_ready_w = 1'b1;
+                        pe_dout_ready_w = 1'b1;
                         waiting_w = 0;
                     end
                 end
@@ -208,7 +208,7 @@ module CVDataLoader (
             rvalid_r <= 0;
             wdata_r <= 0;
             waiting_r <= 0;
-            core_dout_ready_r <= 0;
+            pe_dout_ready_r <= 0;
             h_r <= 0;
             w_r <= 0;
             o_r <= 0;
@@ -223,7 +223,7 @@ module CVDataLoader (
             rvalid_r <= rvalid_w;
             wdata_r <= wdata_w;
             waiting_r <= waiting_w;
-            core_dout_ready_r <= core_dout_ready_w;
+            pe_dout_ready_r <= pe_dout_ready_w;
             h_r <= h_w;
             w_r <= w_w;
             o_r <= o_w;

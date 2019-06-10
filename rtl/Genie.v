@@ -99,37 +99,50 @@ module Genie (
     wire        cv_store_output;
     wire        cv_done;
 
-    wire  [4:0] cv_peid;
+    wire  [7:0] cv_peid;
     wire        cv_broadcast;
     wire        cv_pecfg;
-    wire [12:0] cv_Iext;  // TODO: bit width change to 13
-    wire [12:0] cv_Oext;  // TODO: bit width change to 13
-    wire [12:0] cv_Hext;  // TODO: bit width change to 13
-    wire [12:0] cv_Wext;  // TODO: bit width change to 13
-    wire [12:0] cv_Iori;  // TODO: bit width change to 13
-    wire [12:0] cv_Oori;  // TODO: bit width change to 13
-    wire [12:0] cv_Hori;  // TODO: bit width change to 13
-    wire [12:0] cv_Wori;  // TODO: bit width change to 13
+    wire [12:0] cv_cfg_Iext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Oext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Hext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Wext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Iori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Oori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Hori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_cfg_Wori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Iext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Oext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Hext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Wext;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Iori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Oori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Hori;  // FIXME: bit width changed to 13
+    wire [12:0] cv_Wori;  // FIXME: bit width changed to 13
 
-    // TODO: rename CVDataLoader to CVEngine
-    // TODO: move cv core inside CVProcessor
-    wire        cv_core_dout_valid;
-    wire        cv_core_dout_ready;
-    wire [15:0] cv_core_dout_data;
-    wire        cv_core_load_weight;
-    wire        cv_core_load_input;
-    wire        cv_core_store_output;
-    wire        cv_core_idle;
+    wire        cv_pe_dout_valid;
+    wire        cv_pe_dout_ready;
+    wire [15:0] cv_pe_dout_data;
+    wire        cv_pe_load_weight;
+    wire        cv_pe_load_input;
+    wire        cv_pe_store_output;
+    wire        cv_pe_idle;
 
     CVDataLoader u_CVDataLoader (
         .clk(clk),
         .rst(cv_rst),
 
+        // layer-wise
         .I(cv_I),
         .O(cv_O),
         .K(cv_K),
         .H(cv_H),
         .W(cv_W),
+        .has_bias(has_bias),
+        .ifaddr(cv_ifaddr),
+        .weaddr(cv_weaddr),
+        .ofaddr(cv_ofaddr),
+
+        // PE-wise
         .Iext(cv_Iext),
         .Oext(cv_Oext),
         .Hext(cv_Hext),
@@ -138,25 +151,21 @@ module Genie (
         .Oori(cv_Oori),
         .Hori(cv_Hori),
         .Wori(cv_Wori),
-        .has_bias(has_bias),
-
-        .ifaddr(cv_ifaddr),
-        .weaddr(cv_weaddr),
-        .ofaddr(cv_ofaddr),
-
-        .core_dout_valid(cv_core_dout_valid),
-        .core_dout_ready(cv_core_dout_ready),
-        .core_dout_data(cv_core_dout_data),
 
         .load_weight(cv_load_weight),
         .load_input(cv_load_input),
         .store_output(cv_store_output),
 
-        .core_load_weight(cv_core_load_weight),
-        .core_load_input(cv_core_load_input),
-        .core_store_output(cv_core_store_output),
-        .core_idle(cv_core_idle),
+        .pe_dout_valid(cv_pe_dout_valid),
+        .pe_dout_ready(cv_pe_dout_ready),
+        .pe_dout_data(cv_pe_dout_data),
 
+        .pe_load_weight(cv_pe_load_weight),
+        .pe_load_input(cv_pe_load_input),
+        .pe_store_output(cv_pe_store_output),
+        .pe_idle(cv_pe_idle),
+
+        // external interface
         .wvalid(wvalid_[`LAYER_CV]),
         .wready(wready_[`LAYER_CV]),
         .waddr(waddr_[`LAYER_CV]),
@@ -166,32 +175,56 @@ module Genie (
         .raddr(raddr_[`LAYER_CV]),
         .rdata(rdata_[`LAYER_CV]),
 
+        // to decoder
         .done(cv_done)
     );
 
-    BehavCVCore u_BehavCVCore (
+    CVEngine u_CVEngine (
         .clk(clk),
         .rst(cv_rst),
+        .id(cv_peid),
+        .broadcast(cv_broadcast),
+        .cfg(cv_pecfg),
+
+        // data loader signals
         .din_valid(rready),
         .din_data(rdata[15:0]),
-        .dout_valid(cv_core_dout_valid),
-        .dout_ready(cv_core_dout_ready),
-        .dout_data(cv_core_dout_data),
-        .has_bias(has_bias),
-        .act_type(act_type),
+        .dout_valid(cv_pe_dout_valid),
+        .dout_ready(cv_pe_dout_ready),
+        .dout_data(cv_pe_dout_data),
 
-        .load_weight(cv_core_load_weight),
-        .load_input(cv_core_load_input),
-        .store_output(cv_core_store_output),
-        .idle(cv_core_idle),
+        // control signals
+        .load_weight(cv_pe_load_weight),
+        .load_input(cv_pe_load_input),
+        .store_output(cv_pe_store_output),
+        .idle(cv_pe_idle),
 
-        .K(cv_K),
-        .I(cv_I),
-        .Iori(cv_Iori),
+        // PE-wise parameters
+        .cfg_Iext(cv_cfg_Iext),
+        .cfg_Oext(cv_cfg_Oext),
+        .cfg_Hext(cv_cfg_Hext),
+        .cfg_Wext(cv_cfg_Wext),
+        .cfg_Iori(cv_cfg_Iori),
+        .cfg_Oori(cv_cfg_Oori),
+        .cfg_Hori(cv_cfg_Hori),
+        .cfg_Wori(cv_cfg_Wori),
         .Iext(cv_Iext),
         .Oext(cv_Oext),
         .Hext(cv_Hext),
-        .Wext(cv_Wext)
+        .Wext(cv_Wext),
+        .Iori(cv_Iori),
+        .Oori(cv_Oori),
+        .Hori(cv_Hori),
+        .Wori(cv_Wori),
+
+        // layer-wise parameters
+        .has_bias(has_bias),
+        .act_type(act_type),
+        .I(cv_I),
+        .O(cv_O),
+        .K(cv_K),
+        .H(cv_H),
+        .W(cv_W)
     );
 
     wire        mp_rst;
@@ -254,17 +287,17 @@ module Genie (
         .cv_done(cv_done),
 
         .cv_peid(cv_peid),
-        .cv_pe_idle(cv_core_idle),
+        .cv_pe_idle(cv_pe_idle),
         .cv_broadcast(cv_broadcast),
         .cv_pecfg(cv_pecfg),
-        .cv_Iext(cv_Iext),
-        .cv_Oext(cv_Oext),
-        .cv_Hext(cv_Hext),
-        .cv_Wext(cv_Wext),
-        .cv_Iori(cv_Iori),
-        .cv_Oori(cv_Oori),
-        .cv_Hori(cv_Hori),
-        .cv_Wori(cv_Wori),
+        .cv_Iext(cv_cfg_Iext),
+        .cv_Oext(cv_cfg_Oext),
+        .cv_Hext(cv_cfg_Hext),
+        .cv_Wext(cv_cfg_Wext),
+        .cv_Iori(cv_cfg_Iori),
+        .cv_Oori(cv_cfg_Oori),
+        .cv_Hori(cv_cfg_Hori),
+        .cv_Wori(cv_cfg_Wori),
 
         .mp_rst(mp_rst),
         .mp_ifaddr(mp_ifaddr),

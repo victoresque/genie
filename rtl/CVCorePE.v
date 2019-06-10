@@ -16,7 +16,6 @@ module CVCorePE (
     input         load_weight,
     input         load_input,
     input         store_output,
-    output        calc_done,
     output        idle,
 
     // PE-wise parameters
@@ -40,9 +39,11 @@ module CVCorePE (
     // layer-wise parameters
     input         has_bias,
     input   [4:0] act_type,
-    input  [12:0] K,
+    input   [4:0] K,
     input  [12:0] I
 );
+    parameter PEID = 0;
+
     reg  [12:0] Iext_r, Iext_w;
     reg  [12:0] Oext_r, Oext_w;
     reg  [12:0] Hext_r, Hext_w;
@@ -60,5 +61,77 @@ module CVCorePE (
     assign Oori = Oori_r;
     assign Hori = Hori_r;
     assign Wori = Wori_r;
+
+    BehavCVCore u_BehavCVCore (
+        .clk(clk),
+        .rst(rst),
+        .din_valid(din_valid),
+        .din_data(din_data),
+        .dout_valid(dout_valid),
+        .dout_ready(dout_ready),
+        .dout_data(dout_data),
+        .has_bias(has_bias),
+        .act_type(act_type),
+
+        .load_weight(load_weight),
+        .load_input(load_input),
+        .store_output(store_output),
+        .idle(idle),
+
+        .K(K),
+        .I(I),
+        .Iori(Iori_r),
+        .Iext(Iext_r),
+        .Oext(Oext_r),
+        .Hext(Hext_r),
+        .Wext(Wext_r)
+    );
+
+    always @ (*) begin
+        Iext_w = Iext_r;
+        Oext_w = Oext_r;
+        Hext_w = Hext_r;
+        Wext_w = Wext_r;
+        Iori_w = Iori_r;
+        Oori_w = Oori_r;
+        Hori_w = Hori_r;
+        Wori_w = Wori_r;
+
+        if (id == PEID || broadcast) begin
+            if (cfg) begin
+                Iext_w = cfg_Iext;
+                Oext_w = cfg_Oext;
+                Hext_w = cfg_Hext;
+                Wext_w = cfg_Wext;
+                Iori_w = cfg_Iori;
+                Oori_w = cfg_Oori;
+                Hori_w = cfg_Hori;
+                Wori_w = cfg_Wori;
+            end
+        end
+    end
+
+    always @ (posedge clk) begin
+        if (rst) begin
+            Iext_r <= 0;
+            Oext_r <= 0;
+            Hext_r <= 0;
+            Wext_r <= 0;
+            Iori_r <= 0;
+            Oori_r <= 0;
+            Hori_r <= 0;
+            Wori_r <= 0;
+        end
+        else begin
+            Iext_r <= Iext_w;
+            Oext_r <= Oext_w;
+            Hext_r <= Hext_w;
+            Wext_r <= Wext_w;
+            Iori_r <= Iori_w;
+            Oori_r <= Oori_w;
+            Hori_r <= Hori_w;
+            Wori_r <= Wori_w;
+        end
+    end
 endmodule
 
