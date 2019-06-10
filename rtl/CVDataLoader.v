@@ -1,11 +1,17 @@
 module CVDataLoader (
     input         clk,
     input         rst,
+// layer-wise signals
     input  [10:0] I,
     input  [10:0] O,
     input   [4:0] K,
     input  [10:0] H,
     input  [10:0] W,
+    input         has_bias,
+    input  [26:0] ifaddr,
+    input  [26:0] weaddr,
+    input  [26:0] ofaddr,
+// PE-wise signals
     input  [10:0] Iext,
     input  [10:0] Oext,
     input  [10:0] Hext,
@@ -14,25 +20,21 @@ module CVDataLoader (
     input  [10:0] Oori,
     input  [10:0] Hori,
     input  [10:0] Wori,
-    input         has_bias,
-
-    input  [26:0] ifaddr,
-    input  [26:0] weaddr,
-    input  [26:0] ofaddr,
-
+// PE control signals
     input         pe_dout_valid,
     output        pe_dout_ready,
     input  [15:0] pe_dout_data,
-
+// decoder control signals
     input         load_weight,
     input         load_input,
     input         store_output,
-
+    output        done,
+// control signals to PE
     output        pe_load_weight,
     output        pe_load_input,
     output        pe_store_output,
     input         pe_idle,
-
+// external memory interface
     output        wvalid,
     input         wready,
     output [25:0] waddr,
@@ -40,10 +42,10 @@ module CVDataLoader (
     output        rvalid,
     input         rready,
     output [25:0] raddr,
-    input  [31:0] rdata,
-
-    output        done
+    input  [31:0] rdata
 );
+
+// states
     reg   [2:0] state, state_next;
     parameter S_IDLE = 0;
     parameter S_LW   = 1;
@@ -52,31 +54,33 @@ module CVDataLoader (
     parameter S_SOF  = 4;
     parameter S_DONE = 5;
 
+// external memory interface
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;
     reg         wvalid_r, wvalid_w;
     reg         rvalid_r, rvalid_w;
     reg  [31:0] wdata_r, wdata_w;
     reg         waiting_r, waiting_w;
-    reg  [31:0] cnt_r, cnt_w;
+    assign waddr = waddr_r;
+    assign raddr = raddr_r;
+    assign wvalid = wvalid_r;
+    assign rvalid = rvalid_r;
+    assign wdata = wdata_r;
 
+// feature index counters
     wire  [7:0] Hout;
     wire  [7:0] Wout;
     reg   [7:0] h_w, h_r;
     reg   [7:0] w_w, w_r;
     reg  [10:0] o_w, o_r;
     reg  [10:0] i_w, i_r;
-    reg         pe_dout_ready_w, pe_dout_ready_r;
-
+    reg  [31:0] cnt_r, cnt_w;
     assign Hout = Hext - K + 1;
     assign Wout = Wext - K + 1;
+
+// control signals    
+    reg         pe_dout_ready_w, pe_dout_ready_r;
     assign pe_dout_ready = pe_dout_ready_w;
-    
-    assign waddr = waddr_r;
-    assign raddr = raddr_r;
-    assign wvalid = wvalid_r;
-    assign rvalid = rvalid_r;
-    assign wdata = wdata_r;
     assign done = state == S_DONE;
     assign pe_load_weight = state == S_LW;
     assign pe_load_input = state == S_LIF;
@@ -98,6 +102,13 @@ module CVDataLoader (
         state_next = state;
 
         case(state)
+            // S_IDLE:
+            //      if PE is idle, then wait for load_weight, load_input, or store_output
+            //      1. load_weight:  S_LW     
+            //      2. load_input:   S_LIF
+            //      3. store_output: S_SOF
+            //
+            //      if 'pe_idle' is high, then the selected PE is calculating partial sum
             S_IDLE: begin
                 h_w = 0;
                 w_w = 0;

@@ -1,12 +1,13 @@
 module MPDataLoader (
     input         clk,
     input         rst,
+// layer-wise signals
     input  [10:0] C,
     input  [10:0] H,
     input  [10:0] W,
     input  [26:0] ifaddr,
     input  [26:0] ofaddr,
-
+// external memory interface
     output        wvalid,
     input         wready,
     output [25:0] waddr,
@@ -15,9 +16,11 @@ module MPDataLoader (
     input         rready,
     output [25:0] raddr,
     input  [31:0] rdata,
-
+// decoder control signals
     output        done
 );
+
+// states
     reg   [2:0] state, state_next;
     parameter S_IDLE = 0;
     parameter S_LIF  = 1;
@@ -25,32 +28,35 @@ module MPDataLoader (
     parameter S_DONE = 3;
     parameter S_END  = 4;
 
+// external memory interface
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;
     reg         wvalid_r, wvalid_w;
     reg         rvalid_r, rvalid_w;
     reg  [31:0] wdata_r, wdata_w;
     reg         waiting_r, waiting_w;
-    reg  [31:0] cnt_r, cnt_w;
-
-    reg   [7:0] h_w, h_r;
-    reg   [7:0] w_w, w_r;
-    reg  [10:0] c_w, c_r;
-    reg   [2:0] mpid_w, mpid_r;
-
     assign waddr = waddr_r;
     assign raddr = raddr_r;
     assign wvalid = wvalid_r;
     assign rvalid = rvalid_r;
     assign wdata = wdata_r;
-    assign done = state == S_DONE;
 
+// input feature index counters
+    reg   [7:0] h_w, h_r;
+    reg   [7:0] w_w, w_r;
+    reg  [10:0] c_w, c_r;
+    reg  [31:0] cnt_r, cnt_w;
+    reg   [2:0] mpid_w, mpid_r;
+
+// max pooling utility signals
     wire [10:0] Hcrop;
     wire [10:0] Wcrop;
     assign Hcrop = {H[10:1], 1'b0};
     assign Wcrop = {W[10:1], 1'b0};
-
     reg  [15:0] max_r, max_w;
+
+// decoder control signals
+    assign done = state == S_DONE;
 
     always @ (*) begin
         cnt_w = cnt_r;
@@ -68,6 +74,8 @@ module MPDataLoader (
         state_next = state;
 
         case(state)
+            // S_IDLE:
+            //      after rst, automatically start reading input feature (S_LIF)
             S_IDLE: begin
                 rvalid_w = 1'b1;
                 raddr_w = ifaddr;
@@ -75,9 +83,11 @@ module MPDataLoader (
                 h_w = w_r[0] ? h_r + 1 : h_r;
                 max_w = {1'b1, 15'b0};
                 mpid_w = 1;
-
                 state_next = S_LIF;
             end
+            // S_LIF:
+            //      read in 4 input features, find the max value, 
+            //      then write to output feature (S_SOF)
             S_LIF: begin
                 if (rready) begin
                     if ($signed(rdata[15:0]) > $signed(max_r)) begin
@@ -106,6 +116,9 @@ module MPDataLoader (
                     end
                 end
             end
+            // S_SOF:
+            //      write output features, 
+            //      repeat S_LIF and S_SOF until all output features are written
             S_SOF: begin 
                 if (wready) begin
                     wvalid_w = 1'b0;
@@ -124,9 +137,13 @@ module MPDataLoader (
                     end                    
                 end
             end
+            // S_DONE:
+            //      max pooling operation done, send 'done' signal to decoder
             S_DONE: begin
                 state_next = S_END;
             end
+            // S_END:
+            //      end trap, wait for rst
             S_END: begin
             end
         endcase

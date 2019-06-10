@@ -25,7 +25,11 @@ module tb;
     wire [25:0] raddr;
     wire [31:0] rdata;
 
-    ext_sram u_ext_sram (
+// behavioral external memory with adjustable latency
+    ext_sram # (
+        .RD_LATENCY(3),
+        .WR_LATENCY(4)
+    ) u_ext_sram (
         .W0_clk(clk),
         .W0_addr(waddr),
         .W0_valid(wvalid),
@@ -38,6 +42,7 @@ module tb;
         .R0_data(rdata)
     );
 
+// instruction ROM
     wire [12:0] iaddr;
     wire [31:0] idata;
     ext_insn_rom u_insn_rom (
@@ -46,12 +51,16 @@ module tb;
         .rdata(idata)
     );
 
+// model.mem: model weights in hexadecimal format
+//   din.mem: input data in hexadecimal format
+//  insn.mem: instructions in binary format
     initial begin
         $readmemh("../mem/model.mem", u_ext_sram.ram, 0, 67108863);
         $readmemh("../mem/din.mem", u_ext_sram.ram, 0, 67108863);
         $readmemb("../mem/insn.mem", u_insn_rom.ram, 0, 8191);
     end
 
+// top module of GENIE
     Genie u_Genie (
         .clk(clk),
         .rst_n(rst_n),
@@ -67,6 +76,7 @@ module tb;
         .idata(idata)
     );
 
+// clock generator
     Clkgen clk0 (
         .clk(clk),
         .rst_n(rst_n)

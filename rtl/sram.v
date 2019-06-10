@@ -19,7 +19,7 @@ module ext_sram(
     assign W0_ready = W0_ready_r;
     assign R0_ready = R0_ready_r;
 
-    parameter RD_LATENCY = 3;
+    parameter RD_LATENCY = 4;
     parameter WR_LATENCY = 4;
     integer rdcnt;
     integer wrcnt;

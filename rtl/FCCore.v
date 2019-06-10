@@ -4,8 +4,8 @@
 module FCCore (
     input         clk,
     input         rst,
-    input  [11:0] cin,
-    input  [11:0] cout,
+    input  [10:0] cin,
+    input  [10:0] cout,
     input         has_bias,
     input   [4:0] act_type,
     input         din_valid,

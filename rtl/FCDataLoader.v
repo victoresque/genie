@@ -1,17 +1,18 @@
 module FCDataLoader (
     input         clk,
     input         rst,
-
-    input  [11:0] cin,
-    input  [11:0] cout,
+// layer-wise signals
+    input  [10:0] cin,
+    input  [10:0] cout,
     input         has_bias,
     input   [4:0] act_type,
-
+// decoder control signals
     input         lif_start,
     input         lw_start,
     input         sof_start,
-
     input  [26:0] base_addr,
+    output        done,
+// external memory interface
     output        wvalid,
     input         wready,
     output [25:0] waddr,
@@ -19,10 +20,10 @@ module FCDataLoader (
     output        rvalid,
     input         rready,
     output [25:0] raddr,
-    input  [31:0] rdata,
-
-    output        done
+    input  [31:0] rdata
 );
+
+// states
     reg   [2:0] state, state_next;
     parameter S_IDLE = 0;
     parameter S_LIF  = 1;
@@ -31,14 +32,13 @@ module FCDataLoader (
     parameter S_SOF  = 4;
     parameter S_DONE = 5;
 
+// external memory interface
     reg  [25:0] waddr_r, waddr_w;
     reg  [25:0] raddr_r, raddr_w;
     reg         wvalid_r, wvalid_w;
     reg         rvalid_r, rvalid_w;
     reg  [31:0] wdata_r, wdata_w;
     reg         waiting_r, waiting_w;
-    reg  [31:0] cnt_r, cnt_w;
-
     assign waddr = waddr_r;
     assign raddr = raddr_r;
     assign wvalid = wvalid_r;
@@ -46,9 +46,12 @@ module FCDataLoader (
     assign wdata = wdata_r;
     assign done = state == S_DONE;
 
+// FCCore control signals
     wire        fc_dout_valid;
     wire [15:0] fc_dout_data;
     reg         fc_dout_ready_r, fc_dout_ready_w;
+
+    reg  [31:0] cnt_r, cnt_w;
 
     FCCore u_FCCore (
         .clk(clk),
@@ -64,9 +67,6 @@ module FCDataLoader (
         .dout_data(fc_dout_data)
     );
 
-    reg  [23:0] total_weight_r;
-    wire [23:0] total_weight_w;
-    assign total_weight_w = cin * cout;
 
     always @ (*) begin
         cnt_w = cnt_r;
@@ -80,6 +80,12 @@ module FCDataLoader (
         state_next = state;
     
         case(state)
+        // S_IDLE:
+        //      wait for lif_start, lw_start, or sof_start
+        //      1. lif_start: start reading input feature and save in FCCore SRAM (S_LIF)
+        //      2. lw_start:  start reading weight and perform matrix multiplication,
+        //                    output feature will be saved in FCCore SRAM (S_LW)
+        //      3. sof_start: read out FCCore output feature SRAM data (S_SOF)
         S_IDLE: begin
             rvalid_w = 1'b0;
             wvalid_w = 1'b0;
@@ -101,6 +107,8 @@ module FCDataLoader (
                 state_next = S_SOF;
             end
         end
+        // S_LIF:
+        //      load input feature
         S_LIF: begin
             if (rready) begin
                 rvalid_w = 1'b1;
@@ -112,14 +120,17 @@ module FCDataLoader (
                 end
             end
         end
+        // S_LW:
+        //      load weight and perform matrix multiplication
+        //      if 'has_bias', loading bias (S_LB) after completing S_LW
         S_LW: begin
             if (rready) begin
                 rvalid_w = 1'b1;
                 raddr_w = base_addr + cnt_r;
                 cnt_w = cnt_r + 1;
-                if (cnt_r == total_weight_r) begin
+                if (cnt_r == cin * cout) begin
                     if (has_bias) begin
-                        raddr_w = base_addr + total_weight_r;
+                        raddr_w = base_addr + cin * cout;
                         cnt_w = 1;
                         state_next = S_LB;
                     end
@@ -130,10 +141,12 @@ module FCDataLoader (
                 end
             end
         end
+        // S_LB:
+        //      load bias
         S_LB: begin
             if (rready) begin
                 rvalid_w = 1'b1;
-                raddr_w = base_addr + total_weight_r + cnt_r;
+                raddr_w = base_addr + cin * cout + cnt_r;
                 cnt_w = cnt_r + 1;
                 if (cnt_r == cout) begin
                     rvalid_w = 1'b0;
@@ -141,6 +154,8 @@ module FCDataLoader (
                 end
             end
         end
+        // S_SOF:
+        //      read out FCCore output feature SRAM
         S_SOF: begin
             if (cnt_r == cout) begin
                 state_next = S_DONE;
@@ -177,7 +192,6 @@ module FCDataLoader (
             rvalid_r <= 0;
             wdata_r <= 0;
             waiting_r <= 0;
-            total_weight_r <= 0;
             fc_dout_ready_r <= 0;
             state <= S_IDLE;
         end
@@ -189,7 +203,6 @@ module FCDataLoader (
             rvalid_r <= rvalid_w;
             wdata_r <= wdata_w;
             waiting_r <= waiting_w;
-            total_weight_r <= total_weight_w;
             fc_dout_ready_r <= fc_dout_ready_w;
             state <= state_next;
         end

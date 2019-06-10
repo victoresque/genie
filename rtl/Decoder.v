@@ -1,22 +1,23 @@
 module Decoder (
     input         clk,
     input         rst_n,
+// instruction ROM interface
     output [12:0] iaddr,
     input  [31:0] idata,
-
+// layer-wise signals
     output  [4:0] layer_type,
     output  [4:0] act_type,
     output        has_bias,
-
+// fully-connected
     output        fc_rst,
-    output [11:0] fc_cin,   // TODO: wrong width
-    output [11:0] fc_cout,  // TODO: wrong width
+    output [10:0] fc_cin,
+    output [10:0] fc_cout,
     output        fc_lif_start,
     output        fc_lw_start,
     output        fc_sof_start,
     output [26:0] fc_base_addr,
     input         fc_done,
-
+// 2D convolution
     output        cv_rst,
     output [10:0] cv_I,
     output [10:0] cv_O,
@@ -30,20 +31,19 @@ module Decoder (
     output        cv_load_input,
     output        cv_store_output,
     input         cv_done,
-
     output  [7:0] cv_peid,
     input         cv_pe_idle,
     output        cv_broadcast,
     output        cv_pecfg,
-    output [12:0] cv_Iext,
-    output [12:0] cv_Oext,
-    output [12:0] cv_Hext,
-    output [12:0] cv_Wext,
-    output [12:0] cv_Iori,
-    output [12:0] cv_Oori,
-    output [12:0] cv_Hori,
-    output [12:0] cv_Wori,
-
+    output [10:0] cv_Iext,
+    output [10:0] cv_Oext,
+    output [10:0] cv_Hext,
+    output [10:0] cv_Wext,
+    output [10:0] cv_Iori,
+    output [10:0] cv_Oori,
+    output [10:0] cv_Hori,
+    output [10:0] cv_Wori,
+// max pooling
     output        mp_rst,
     output [26:0] mp_ifaddr,
     output [26:0] mp_ofaddr,
@@ -118,14 +118,14 @@ module Decoder (
     assign cv_K = cv_cfg_r[4:0];
     assign cv_H = cv_ifcfg_r[25:13];
     assign cv_W = cv_ifcfg_r[12:0];
-    assign cv_Iext = cv_ioext_r[25:13];
-    assign cv_Oext = cv_ioext_r[12:0];
-    assign cv_Hext = cv_hwext_r[25:13];
-    assign cv_Wext = cv_hwext_r[12:0];
-    assign cv_Iori = cv_ioori_r[25:13];
-    assign cv_Oori = cv_ioori_r[12:0];
-    assign cv_Hori = cv_hwori_r[25:13];
-    assign cv_Wori = cv_hwori_r[12:0];
+    assign cv_Iext = cv_ioext_r[23:13];
+    assign cv_Oext = cv_ioext_r[10:0];
+    assign cv_Hext = cv_hwext_r[23:13];
+    assign cv_Wext = cv_hwext_r[10:0];
+    assign cv_Iori = cv_ioori_r[23:13];
+    assign cv_Oori = cv_ioori_r[10:0];
+    assign cv_Hori = cv_hwori_r[23:13];
+    assign cv_Wori = cv_hwori_r[10:0];
     assign cv_ifaddr = cv_ifaddr_r;
     assign cv_weaddr = cv_weaddr_r;
     assign cv_ofaddr = cv_ofaddr_r;
