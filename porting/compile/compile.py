@@ -2,6 +2,10 @@ import sys
 import numpy as np
 
 
+ext_ori_width = 13
+val_hold = 2**(ext_ori_width-1)
+
+
 def assemble(insn):
     op = insn[0]
     if op == 'cfgl':
@@ -69,10 +73,9 @@ def assemble(insn):
         opcode = 18
         assert insn[1] == 'hw' or insn[1] == 'io'
         sel = 0 if insn[1] == 'hw' else 1
-        ori_width = 13
         ori1, ori2 = int(insn[2]), int(insn[3])
-        ori1 = ori1 if ori1 >= 0 else 2**ori_width + ori1
-        ori2 = ori2 if ori2 >= 0 else 2**ori_width + ori2
+        ori1 = ori1 if ori1 >= 0 else 2**ext_ori_width + ori1
+        ori2 = ori2 if ori2 >= 0 else 2**ext_ori_width + ori2
         return opcode * 2**27 + sel * 2**26 + ori1 * 2**13 + ori2
     elif op == 'cvlifp':
         opcode = 19
@@ -100,7 +103,7 @@ def assemble(insn):
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        print("Usage: python compile.py <desc> <asm output> <insn output>")
+        print("Usage: python compile.py <desc> <asm output> <weight>")
         exit()
 
     program = []
@@ -149,7 +152,7 @@ if __name__ == '__main__':
 
     C, H, W = 0, 0, 0
 
-    Hp, Wp, Op, Ip = 12, 12, 12, 12
+    Hp, Wp, Op, Ip = 12, 12, 5, 12
 
     program.append(
         ['// start of calculation, input feature @{}'.format(ifbase[0])])
@@ -186,29 +189,40 @@ if __name__ == '__main__':
                 program.append(['cvaif', ifbase[0]])
                 program.append(['cvaw', wbase[wid]])
                 program.append(['cvaof', ifbase[1]])
-                program.append(['cvselpe', 0])
                 Hext, Wext = min(H, Hp), min(W, Wp)
-                for s in range(0, O, Op):
-                    Oext = min(Op, O-s)
-                    program.append(['cvcfgori', 'io', 0, s])
-                    program.append(['cvcfgext', 'io', 0, min(O, s+Op)-s])
-                    program.append(['cvlwp'])
+
+                n_core = 4
+
+                for s in range(0, O, Op*n_core):
+                    last_peid = 0
+                    for peid in range(n_core):
+                        if O-(s+peid*Op) <= 0:
+                            break
+                        last_peid += 1
+                        program.append(['cvselpe', peid])
+                        program.append(['cvcfgori', 'io', 0, s+peid*Op])
+                        program.append(['cvcfgext', 'io', 0,
+                                        min(O-(s+peid*Op), Op)])
+                        program.append(['cvlwp'])
                     for h in range(-pad, H+pad, Hp-K+1):
                         if H + pad - h < K:
                             break
                         for w in range(-pad, W+pad, Wp-K+1):
                             if W + pad - w < K:
                                 break
+                            program.append(['cvselpe', 'broadcast'])
                             Oori, Hori, Wori = s, h, w
                             program.append(['cvcfgori', 'hw', h, w])
                             program.append(['cvcfgext', 'hw',
                                             min(H+pad-h, Hp), min(W+pad-w, Wp)])
                             for m in range(0, I, Ip):
-                                program.append(['cvcfgori', 'io', m, s])
+                                program.append(['cvcfgori', 'io', m, val_hold])
                                 program.append(['cvcfgext', 'io',
-                                                min(I, m+Ip)-m, min(O, s+Op)-s])
+                                                min(I-m, Ip), val_hold])
                                 program.append(['cvlifp'])
-                            program.append(['cvsofp'])
+                            for peid in range(last_peid):
+                                program.append(['cvselpe', peid])
+                                program.append(['cvsofp'])
                 H, W = H - K + 1 + 2*pad, W - K + 1 + 2*pad
                 ifbase[0], ifbase[1] = ifbase[1], ifbase[0]
                 wid += 1
@@ -243,9 +257,25 @@ if __name__ == '__main__':
                 line = [x.strip() for x in line]
                 program.append(line)
 
-    with open(sys.argv[3], 'w') as f:
+    with open('../../mem/insn.mem', 'w') as f:
         insn_mem_size = 8192
         f.write('@0\n')
         for insn in program:
             f.write('{:032b}\n'.format(assemble(insn)))
         f.write('@{:x}\n'.format(insn_mem_size-1))
+
+    S, M, F = 1, 5, 10
+    ext_mem_size = 67108864
+
+    model = np.load(sys.argv[3])
+    model = (model * 2**F).astype(np.int32)
+
+    print(len(model))
+    model[model < 0] += 2**16
+    model = model.astype(np.uint16)
+
+    with open('../../mem/model.mem', 'w') as f:
+        f.write('@0\n')
+        for p in model:
+            f.write('{:04x}\n'.format(p))
+        f.write('@{:x}\n'.format(ext_mem_size-1))

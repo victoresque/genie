@@ -59,7 +59,8 @@ module FCCore (
     // TODO: move activation to upper level
     assign dout_data = (act_type == `ACT_RELU) ? (sum[15] ? 0 : sum) : sum;
 
-    reg  [31:0] MULT;
+    wire [31:0] MULT;
+    assign MULT = $signed(if_rdata[15:0]) * $signed(din_data);
 
     integer i;
 
@@ -118,7 +119,6 @@ module FCCore (
                         if_addr_w = if_addr_r + 1;
                     end
 
-                    MULT = $signed(if_rdata[15:0]) * $signed(din_data);
                     if (if_addr_r == 0) begin
                         of_wdata_w = MULT[25:10];
                     end

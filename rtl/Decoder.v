@@ -36,14 +36,14 @@ module Decoder (
     input         cv_pe_idle,
     output        cv_broadcast,
     output        cv_pecfg,
-    output [10:0] cv_Iext,
-    output [10:0] cv_Oext,
-    output [10:0] cv_Hext,
-    output [10:0] cv_Wext,
-    output [10:0] cv_Iori,
-    output [10:0] cv_Oori,
-    output [10:0] cv_Hori,
-    output [10:0] cv_Wori,
+    output [12:0] cv_Iext,
+    output [12:0] cv_Oext,
+    output [12:0] cv_Hext,
+    output [12:0] cv_Wext,
+    output [12:0] cv_Iori,
+    output [12:0] cv_Oori,
+    output [12:0] cv_Hori,
+    output [12:0] cv_Wori,
 // max pooling
     output        mp_rst,
     output [26:0] mp_ifaddr,
@@ -120,14 +120,14 @@ module Decoder (
     assign cv_H = cv_ifcfg_r[25:13];
     assign cv_W = cv_ifcfg_r[12:0];
     assign cv_pad = cv_cfg_r[4:3];
-    assign cv_Iext = cv_ioext_r[23:13];
-    assign cv_Oext = cv_ioext_r[10:0];
-    assign cv_Hext = cv_hwext_r[23:13];
-    assign cv_Wext = cv_hwext_r[10:0];
-    assign cv_Iori = cv_ioori_r[23:13];
-    assign cv_Oori = cv_ioori_r[10:0];
-    assign cv_Hori = cv_hwori_r[23:13];
-    assign cv_Wori = cv_hwori_r[10:0];
+    assign cv_Iext = cv_ioext_r[25:13];
+    assign cv_Oext = cv_ioext_r[12:0];
+    assign cv_Hext = cv_hwext_r[25:13];
+    assign cv_Wext = cv_hwext_r[12:0];
+    assign cv_Iori = cv_ioori_r[25:13];
+    assign cv_Oori = cv_ioori_r[12:0];
+    assign cv_Hori = cv_hwori_r[25:13];
+    assign cv_Wori = cv_hwori_r[12:0];
     assign cv_ifaddr = cv_ifaddr_r;
     assign cv_weaddr = cv_weaddr_r;
     assign cv_ofaddr = cv_ofaddr_r;
@@ -210,8 +210,19 @@ module Decoder (
                 state_next = S_CVSELPE; end
             `OP_CVCFGEXT: begin
                 if (cv_pe_idle) begin
-                    if (idata[26]) cv_ioext_w = idata[25:0];
-                    else           cv_hwext_w = idata[25:0];
+                    if (idata[26]) begin
+                        // these 13'b1_0000_0000_0000 are required for multi-PE
+                        cv_ioext_w = idata[25:0];
+                        cv_hwext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_ioori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                    end
+                    else begin 
+                        cv_ioext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwext_w = idata[25:0];
+                        cv_ioori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                    end
                     state_next = S_CVCFGEXT; 
                 end
                 else begin
@@ -220,8 +231,18 @@ module Decoder (
             end
             `OP_CVCFGORI: begin
                 if (cv_pe_idle) begin
-                    if (idata[26]) cv_ioori_w = idata[25:0];
-                    else           cv_hwori_w = idata[25:0];
+                    if (idata[26]) begin
+                        cv_ioori_w = idata[25:0];
+                        cv_hwori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_ioext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                    end
+                    else begin 
+                        cv_ioori_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwori_w = idata[25:0];
+                        cv_ioext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                        cv_hwext_w = {1'b1, 12'b0, 1'b1, 12'b0};
+                    end
                     state_next = S_CVCFGORI; 
                 end
                 else begin

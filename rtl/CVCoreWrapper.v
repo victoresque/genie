@@ -1,24 +1,21 @@
-module CVCorePE (
+module CVCoreWrapper (
     input         clk,
     input         rst,
     input   [7:0] id,
     input         broadcast,
     input         cfg,
-
-    // data loader signals
+// data loader signals
     input         din_valid,
     input  [15:0] din_data,
     output        dout_valid,
     input         dout_ready,
     output [15:0] dout_data,
-
-    // control signals
+// control signals
     input         load_weight,
     input         load_input,
     input         store_output,
     output        idle,
-
-    // PE-wise parameters
+// PE-wise parameters
     input  [12:0] cfg_Iext,
     input  [12:0] cfg_Oext,
     input  [12:0] cfg_Hext,
@@ -35,8 +32,7 @@ module CVCorePE (
     output [12:0] Oori,
     output [12:0] Hori,
     output [12:0] Wori,
-
-    // layer-wise parameters
+// layer-wise parameters
     input         has_bias,
     input   [4:0] act_type,
     input   [4:0] K,
@@ -62,20 +58,22 @@ module CVCorePE (
     assign Hori = Hori_r;
     assign Wori = Wori_r;
 
+    wire active_this_pe = (id==PEID) || broadcast;
+
     BehavCVCore u_BehavCVCore (
         .clk(clk),
         .rst(rst),
-        .din_valid(din_valid),
+        .din_valid(din_valid && active_this_pe),
         .din_data(din_data),
         .dout_valid(dout_valid),
-        .dout_ready(dout_ready),
+        .dout_ready(dout_ready && active_this_pe),
         .dout_data(dout_data),
         .has_bias(has_bias),
         .act_type(act_type),
 
-        .load_weight(load_weight),
-        .load_input(load_input),
-        .store_output(store_output),
+        .load_weight(load_weight && active_this_pe),
+        .load_input(load_input && active_this_pe),
+        .store_output(store_output && active_this_pe),
         .idle(idle),
 
         .K(K),
@@ -97,17 +95,16 @@ module CVCorePE (
         Hori_w = Hori_r;
         Wori_w = Wori_r;
 
-        if (id == PEID || broadcast) begin
-            if (cfg) begin
-                Iext_w = cfg_Iext;
-                Oext_w = cfg_Oext;
-                Hext_w = cfg_Hext;
-                Wext_w = cfg_Wext;
-                Iori_w = cfg_Iori;
-                Oori_w = cfg_Oori;
-                Hori_w = cfg_Hori;
-                Wori_w = cfg_Wori;
-            end
+        if (active_this_pe && cfg) begin
+            // ext(ori)[12:11]==2 means the value should be holded instead of update
+            Iext_w = cfg_Iext[12:11]==2 ? Iext_r : cfg_Iext;
+            Oext_w = cfg_Oext[12:11]==2 ? Oext_r : cfg_Oext;
+            Hext_w = cfg_Hext[12:11]==2 ? Hext_r : cfg_Hext;
+            Wext_w = cfg_Wext[12:11]==2 ? Wext_r : cfg_Wext;
+            Iori_w = cfg_Iori[12:11]==2 ? Iori_r : cfg_Iori;
+            Oori_w = cfg_Oori[12:11]==2 ? Oori_r : cfg_Oori;
+            Hori_w = cfg_Hori[12:11]==2 ? Hori_r : cfg_Hori;
+            Wori_w = cfg_Wori[12:11]==2 ? Wori_r : cfg_Wori;
         end
     end
 

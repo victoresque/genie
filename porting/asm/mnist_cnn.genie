@@ -8,118 +8,145 @@ cvaw, 0
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 1
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, -1
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 9
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 19
 cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 1, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 1, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 4
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
+cvselpe, 2
 cvsofp
-cvcfgori, hw, -1, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, -1
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 9
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 19
-cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 1, 4
-cvlifp
+cvselpe, 3
 cvsofp
 // conv
 cfgl, conv, noact, bias
@@ -130,172 +157,172 @@ cvaw, 160
 cvaof, 125952
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 1
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, -1
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 9
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 19
 cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 4
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 2
 cvsofp
-cvcfgori, hw, -1, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, -1
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 9
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 19
-cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 3
 cvsofp
 // conv
 cfgl, conv, relu, bias
@@ -306,172 +333,172 @@ cvaw, 2480
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 1
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 19
 cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, -1
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 9
 cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 19, 19
 cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 4
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 2
 cvsofp
-cvcfgori, hw, -1, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 19
-cvcfgext, hw, 12, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, -1
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 9
-cvcfgext, hw, 10, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
-cvsofp
-cvcfgori, hw, 19, 19
-cvcfgext, hw, 10, 10
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 4
-cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 4
-cvlifp
+cvselpe, 3
 cvsofp
 // maxpool
 cfgl, mp
@@ -488,121 +515,159 @@ cvaw, 4800
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 2
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 8
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 4, 8
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 4, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 4, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 4, 8
-cvlifp
+cvselpe, 2
 cvsofp
 // conv
 cfgl, conv, noact, nobias
@@ -613,157 +678,183 @@ cvaw, 9408
 cvaof, 125952
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 2
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 8
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
+cvselpe, 2
 cvsofp
 // conv
 cfgl, conv, relu, nobias
@@ -774,157 +865,183 @@ cvaw, 18624
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 2
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, -1, 9
 cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, -1
 cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, broadcast
 cvcfgori, hw, 9, 9
 cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 8
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 12, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, hw, -1, 9
-cvcfgext, hw, 12, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, -1
-cvcfgext, hw, 6, 12
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
-cvsofp
-cvcfgori, hw, 9, 9
-cvcfgext, hw, 6, 6
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 8
-cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 8
-cvlifp
+cvselpe, 2
 cvsofp
 // maxpool
 cfgl, mp
@@ -941,94 +1058,129 @@ cvaw, 27840
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 35
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 40
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 45
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 50
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 55
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 8, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 36
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 36
-cvcfgext, io, 8, 12
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, io, 0, 48
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 48
-cvcfgext, io, 8, 12
-cvlifp
+cvselpe, 2
 cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
 cvcfgori, io, 0, 60
 cvcfgext, io, 0, 4
 cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 60
-cvcfgext, io, 8, 4
+cvcfgori, io, 24, 4096
+cvcfgext, io, 8, 4096
 cvlifp
+cvselpe, 0
 cvsofp
 // conv
 cfgl, conv, noact, bias
@@ -1039,148 +1191,165 @@ cvaw, 46336
 cvaof, 125952
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 35
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 40
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 45
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 50
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 55
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 24
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 36
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 36, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 48, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 60, 36
-cvcfgext, io, 4, 12
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, io, 0, 48
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 36, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 48, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 60, 48
-cvcfgext, io, 4, 12
-cvlifp
+cvselpe, 2
 cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
 cvcfgori, io, 0, 60
 cvcfgext, io, 0, 4
 cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 60
-cvcfgext, io, 4, 4
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
 // conv
 cfgl, conv, relu, bias
@@ -1191,148 +1360,165 @@ cvaw, 83264
 cvaof, 147584
 cvselpe, 0
 cvcfgori, io, 0, 0
-cvcfgext, io, 0, 12
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 5
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 10
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 15
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 0
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 0
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 12
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 20
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 25
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 30
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 35
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 12
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 12
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 24
-cvcfgext, io, 0, 12
+cvselpe, 1
+cvsofp
+cvselpe, 2
+cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
+cvcfgori, io, 0, 40
+cvcfgext, io, 0, 5
 cvlwp
+cvselpe, 1
+cvcfgori, io, 0, 45
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 2
+cvcfgori, io, 0, 50
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, 3
+cvcfgori, io, 0, 55
+cvcfgext, io, 0, 5
+cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 24
-cvcfgext, io, 12, 12
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 24
-cvcfgext, io, 4, 12
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
-cvcfgori, io, 0, 36
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 36, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 48, 36
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 60, 36
-cvcfgext, io, 4, 12
-cvlifp
+cvselpe, 1
 cvsofp
-cvcfgori, io, 0, 48
-cvcfgext, io, 0, 12
-cvlwp
-cvcfgori, hw, -1, -1
-cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 12, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 24, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 36, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 48, 48
-cvcfgext, io, 12, 12
-cvlifp
-cvcfgori, io, 60, 48
-cvcfgext, io, 4, 12
-cvlifp
+cvselpe, 2
 cvsofp
+cvselpe, 3
+cvsofp
+cvselpe, 0
 cvcfgori, io, 0, 60
 cvcfgext, io, 0, 4
 cvlwp
+cvselpe, broadcast
 cvcfgori, hw, -1, -1
 cvcfgext, hw, 9, 9
-cvcfgori, io, 0, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 0, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 12, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 12, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 24, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 24, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 36, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 36, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 48, 60
-cvcfgext, io, 12, 4
+cvcfgori, io, 48, 4096
+cvcfgext, io, 12, 4096
 cvlifp
-cvcfgori, io, 60, 60
-cvcfgext, io, 4, 4
+cvcfgori, io, 60, 4096
+cvcfgext, io, 4, 4096
 cvlifp
+cvselpe, 0
 cvsofp
 // maxpool
 cfgl, mp

@@ -13,14 +13,14 @@ module CVDataLoader (
     input  [26:0] weaddr,
     input  [26:0] ofaddr,
 // PE-wise signals
-    input  [10:0] Iext,
-    input  [10:0] Oext,
-    input  [10:0] Hext,
-    input  [10:0] Wext,
-    input  [10:0] Iori,
-    input  [10:0] Oori,
-    input  [10:0] Hori,
-    input  [10:0] Wori,
+    input  [12:0] Iext,
+    input  [12:0] Oext,
+    input  [12:0] Hext,
+    input  [12:0] Wext,
+    input  [12:0] Iori,
+    input  [12:0] Oori,
+    input  [12:0] Hori,
+    input  [12:0] Wori,
 // PE control signals
     input         pe_dout_valid,
     output        pe_dout_ready,
@@ -71,21 +71,21 @@ module CVDataLoader (
     assign wdata = wdata_r;
 
 // feature index counters
-    wire [10:0] Hout;
-    wire [10:0] Wout;
-    reg  [10:0] h_w, h_r;
-    reg  [10:0] w_w, w_r;
-    reg  [10:0] o_w, o_r;
-    reg  [10:0] i_w, i_r;
+    wire [12:0] Hout;
+    wire [12:0] Wout;
+    reg  [12:0] h_w, h_r;
+    reg  [12:0] w_w, w_r;
+    reg  [12:0] o_w, o_r;
+    reg  [12:0] i_w, i_r;
     reg  [31:0] cnt_r, cnt_w;
     assign Hout = Hext - K + 1;
     assign Wout = Wext - K + 1;
 
 // signed additions are calculated here to prevent Verilog numerical errors 
-    wire [10:0] Hori_plus_h;
-    wire [10:0] Hori_plus_h_plus_pad;
-    wire [10:0] Wori_plus_w;
-    wire [10:0] Wori_plus_w_plus_pad;
+    wire [12:0] Hori_plus_h;
+    wire [12:0] Hori_plus_h_plus_pad;
+    wire [12:0] Wori_plus_w;
+    wire [12:0] Wori_plus_w_plus_pad;
     assign Hori_plus_h = Hori + h_r;
     assign Hori_plus_h_plus_pad = Hori + h_r + pad;
     assign Wori_plus_w = Wori + w_r;
