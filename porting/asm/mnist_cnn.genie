@@ -1,0 +1,1350 @@
+// start of calculation, input feature @125952
+// conv
+cfgl, conv, noact, bias
+cfgcv, 1, 16, 3, 1
+cfgcvif, 28, 28
+cvaif, 125952
+cvaw, 0
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 1, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 1, 4
+cvlifp
+cvsofp
+// conv
+cfgl, conv, noact, bias
+cfgcv, 16, 16, 3, 1
+cfgcvif, 28, 28
+cvaif, 147584
+cvaw, 160
+cvaof, 125952
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+// conv
+cfgl, conv, relu, bias
+cfgcv, 16, 16, 3, 1
+cfgcvif, 28, 28
+cvaif, 125952
+cvaw, 2480
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 19
+cvcfgext, hw, 12, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, -1
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 9
+cvcfgext, hw, 10, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+cvcfgori, hw, 19, 19
+cvcfgext, hw, 10, 10
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+// maxpool
+cfgl, mp
+cfgcv, 16, 16, 0, 0
+cfgcvif, 28, 28
+mpaif, 147584
+mpsof, 125952
+// conv
+cfgl, conv, noact, nobias
+cfgcv, 16, 32, 3, 1
+cfgcvif, 14, 14
+cvaif, 125952
+cvaw, 4800
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 8
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 4, 8
+cvlifp
+cvsofp
+// conv
+cfgl, conv, noact, nobias
+cfgcv, 32, 32, 3, 1
+cfgcvif, 14, 14
+cvaif, 147584
+cvaw, 9408
+cvaof, 125952
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 8
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+// conv
+cfgl, conv, relu, nobias
+cfgcv, 32, 32, 3, 1
+cfgcvif, 14, 14
+cvaif, 125952
+cvaw, 18624
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 8
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 12, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, -1, 9
+cvcfgext, hw, 12, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, -1
+cvcfgext, hw, 6, 12
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+cvcfgori, hw, 9, 9
+cvcfgext, hw, 6, 6
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 8
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 8
+cvlifp
+cvsofp
+// maxpool
+cfgl, mp
+cfgcv, 32, 32, 0, 0
+cfgcvif, 14, 14
+mpaif, 147584
+mpsof, 125952
+// conv
+cfgl, conv, noact, bias
+cfgcv, 32, 64, 3, 1
+cfgcvif, 7, 7
+cvaif, 125952
+cvaw, 27840
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 36
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 36
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 48
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 48
+cvcfgext, io, 8, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 60
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 24, 60
+cvcfgext, io, 8, 4
+cvlifp
+cvsofp
+// conv
+cfgl, conv, noact, bias
+cfgcv, 64, 64, 3, 1
+cfgcvif, 7, 7
+cvaif, 147584
+cvaw, 46336
+cvaof, 125952
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 24
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 36
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 36
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 48
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 48
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 60
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 24, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 36, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 48, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 60, 60
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+// conv
+cfgl, conv, relu, bias
+cfgcv, 64, 64, 3, 1
+cfgcvif, 7, 7
+cvaif, 125952
+cvaw, 83264
+cvaof, 147584
+cvselpe, 0
+cvcfgori, io, 0, 0
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 0
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 0
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 12
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 12
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 12
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 24
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 24
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 24
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 36
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 36
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 36
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 48
+cvcfgext, io, 0, 12
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 12, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 24, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 36, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 48, 48
+cvcfgext, io, 12, 12
+cvlifp
+cvcfgori, io, 60, 48
+cvcfgext, io, 4, 12
+cvlifp
+cvsofp
+cvcfgori, io, 0, 60
+cvcfgext, io, 0, 4
+cvlwp
+cvcfgori, hw, -1, -1
+cvcfgext, hw, 9, 9
+cvcfgori, io, 0, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 12, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 24, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 36, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 48, 60
+cvcfgext, io, 12, 4
+cvlifp
+cvcfgori, io, 60, 60
+cvcfgext, io, 4, 4
+cvlifp
+cvsofp
+// maxpool
+cfgl, mp
+cfgcv, 64, 64, 0, 0
+cfgcvif, 7, 7
+mpaif, 147584
+mpsof, 125952
+// fc
+cfgl, fc, relu, nobias
+cfgfc, 576, 10
+fclif, 125952
+fclw, 120192
+fcsof, 147584
+// end of calculation, out feature @147584
+eoc

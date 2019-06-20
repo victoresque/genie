@@ -99,8 +99,9 @@ module Genie (
     wire [10:0] cv_I;
     wire [10:0] cv_O;
     wire  [4:0] cv_K;
-    wire [12:0] cv_H;  // TODO: bit width change to 13
-    wire [12:0] cv_W;  // TODO: bit width change to 13
+    wire [12:0] cv_H;  // TODO: bit width has been changed to 13 here
+    wire [12:0] cv_W;  // TODO: bit width has been changed to 13 here
+    wire  [1:0] cv_pad;
     wire [26:0] cv_ifaddr;
     wire [26:0] cv_weaddr;
     wire [26:0] cv_ofaddr;
@@ -138,6 +139,8 @@ module Genie (
     wire        cv_pe_store_output;
     wire        cv_pe_idle;
 
+    wire [15:0] cv_pe_data;
+
     CVDataLoader u_CVDataLoader (
         .clk(clk),
         .rst(cv_rst),
@@ -147,6 +150,7 @@ module Genie (
         .K(cv_K),
         .H(cv_H),
         .W(cv_W),
+        .pad(cv_pad),
         .has_bias(has_bias),
         .ifaddr(cv_ifaddr),
         .weaddr(cv_weaddr),
@@ -181,7 +185,9 @@ module Genie (
         .rvalid(rvalid_[`LAYER_CV]),
         .rready(rready_[`LAYER_CV]),
         .raddr(raddr_[`LAYER_CV]),
-        .rdata(rdata_[`LAYER_CV])
+        .rdata(rdata_[`LAYER_CV]),
+    // CVEngine data (for padding)
+        .pedata(cv_pe_data)
     );
 
     CVEngine u_CVEngine (
@@ -192,7 +198,7 @@ module Genie (
         .cfg(cv_pecfg),
     // data loader signals
         .din_valid(rready),
-        .din_data(rdata[15:0]),
+        .din_data(cv_pe_data),
         .dout_valid(cv_pe_dout_valid),
         .dout_ready(cv_pe_dout_ready),
         .dout_data(cv_pe_dout_data),
@@ -291,6 +297,7 @@ module Genie (
         .cv_K(cv_K),
         .cv_H(cv_H),
         .cv_W(cv_W),
+        .cv_pad(cv_pad),
         .cv_ifaddr(cv_ifaddr),
         .cv_weaddr(cv_weaddr),
         .cv_ofaddr(cv_ofaddr),

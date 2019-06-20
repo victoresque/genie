@@ -24,6 +24,7 @@ module Decoder (
     output  [4:0] cv_K,
     output [12:0] cv_H,
     output [12:0] cv_W,
+    output  [1:0] cv_pad,
     output [26:0] cv_ifaddr,
     output [26:0] cv_weaddr,
     output [26:0] cv_ofaddr,
@@ -115,9 +116,10 @@ module Decoder (
     assign cv_rst = state == S_CFGCV;
     assign cv_I = cv_cfg_r[26:16];
     assign cv_O = cv_cfg_r[15:5];
-    assign cv_K = cv_cfg_r[4:0];
+    assign cv_K = {2'b0, cv_cfg_r[2:0]};  // TODO: shrink port
     assign cv_H = cv_ifcfg_r[25:13];
     assign cv_W = cv_ifcfg_r[12:0];
+    assign cv_pad = cv_cfg_r[4:3];
     assign cv_Iext = cv_ioext_r[23:13];
     assign cv_Oext = cv_ioext_r[10:0];
     assign cv_Hext = cv_hwext_r[23:13];

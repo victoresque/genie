@@ -35,8 +35,9 @@ def assemble(insn):
         return opcode * 2**27 + addr
     elif op == 'cfgcv':
         opcode = 11
-        cin, cout, kernel = int(insn[1]), int(insn[2]), int(insn[3])
-        return opcode * 2**27 + cin * 2**16 + cout * 2**5 + kernel
+        cin, cout, pad, kernel = \
+            int(insn[1]), int(insn[2]), int(insn[4]), int(insn[3])
+        return opcode * 2**27 + cin * 2**16 + cout * 2**5 + pad * 2**3 + kernel
     elif op == 'cfgcvif':
         opcode = 12
         height, width = int(insn[1]), int(insn[2])
@@ -68,7 +69,10 @@ def assemble(insn):
         opcode = 18
         assert insn[1] == 'hw' or insn[1] == 'io'
         sel = 0 if insn[1] == 'hw' else 1
+        ori_width = 13
         ori1, ori2 = int(insn[2]), int(insn[3])
+        ori1 = ori1 if ori1 >= 0 else 2**ori_width + ori1
+        ori2 = ori2 if ori2 >= 0 else 2**ori_width + ori2
         return opcode * 2**27 + sel * 2**26 + ori1 * 2**13 + ori2
     elif op == 'cvlifp':
         opcode = 19
@@ -96,8 +100,7 @@ def assemble(insn):
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        print("Usage: python compile.py ../desc/cnn.desc"
-              " ../asm/cnn.genie ../../mem/insn.mem")
+        print("Usage: python compile.py <desc> <asm output> <insn output>")
         exit()
 
     program = []
@@ -137,7 +140,7 @@ if __name__ == '__main__':
             else:
                 assert False
 
-    ifbase = [wbase[-1] + ifsize * i for i in range(3)]
+    ifbase = [wbase[-1] + ifsize * 2 * i for i in range(3)]
     ifid = [i for i in range(3)]
     wid = 0
 
@@ -174,7 +177,9 @@ if __name__ == '__main__':
                 program.append(['// conv'])
                 prop = line[2:]
                 param = [int(x) for x in line[1].split(',')]
-                I, O, K = param
+                if len(param) == 3:  # no padding
+                    param.append(0)
+                I, O, K, pad = param
                 program.append(['cfgl', 'conv', *prop])
                 program.append(['cfgcv', *param])
                 program.append(['cfgcvif', H, W])
@@ -188,29 +193,29 @@ if __name__ == '__main__':
                     program.append(['cvcfgori', 'io', 0, s])
                     program.append(['cvcfgext', 'io', 0, min(O, s+Op)-s])
                     program.append(['cvlwp'])
-                    for h in range(0, H, Hp-K+1):
-                        if H - h < K:
+                    for h in range(-pad, H+pad, Hp-K+1):
+                        if H + pad - h < K:
                             break
-                        for w in range(0, W, Wp-K+1):
-                            if W - w < K:
+                        for w in range(-pad, W+pad, Wp-K+1):
+                            if W + pad - w < K:
                                 break
                             Oori, Hori, Wori = s, h, w
                             program.append(['cvcfgori', 'hw', h, w])
                             program.append(['cvcfgext', 'hw',
-                                            min(H, h+Hp)-h, min(W, w+Wp)-w])
+                                            min(H+pad-h, Hp), min(W+pad-w, Wp)])
                             for m in range(0, I, Ip):
                                 program.append(['cvcfgori', 'io', m, s])
                                 program.append(['cvcfgext', 'io',
                                                 min(I, m+Ip)-m, min(O, s+Op)-s])
                                 program.append(['cvlifp'])
                             program.append(['cvsofp'])
-                H, W = H - K + 1, W - K + 1
+                H, W = H - K + 1 + 2*pad, W - K + 1 + 2*pad
                 ifbase[0], ifbase[1] = ifbase[1], ifbase[0]
                 wid += 1
             elif layer_type == 'maxpool':
                 program.append(['// maxpool'])
                 program.append(['cfgl', 'mp'])
-                program.append(['cfgcv', O, O, 0])
+                program.append(['cfgcv', O, O, 0, 0])
                 program.append(['cfgcvif', H, W])
                 program.append(['mpaif', ifbase[0]])
                 program.append(['mpsof', ifbase[1]])

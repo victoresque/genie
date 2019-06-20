@@ -1,0 +1,15 @@
+ifdim 1,28,28
+conv 1,16,3,1 noact bias
+conv 16,16,3,1 noact bias
+conv 16,16,3,1 relu bias
+maxpool
+conv 16,32,3,1 noact nobias
+conv 32,32,3,1 noact nobias
+conv 32,32,3,1 relu nobias
+maxpool
+conv 32,64,3,1 noact bias
+conv 64,64,3,1 noact bias
+conv 64,64,3,1 relu bias
+maxpool
+flatten
+fc 576,10 relu nobias

@@ -1,2 +1,0 @@
-ifdim 32,12,12
-conv 32,64,3 relu bias

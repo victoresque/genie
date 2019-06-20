@@ -73,4 +73,4 @@ if __name__ == '__main__':
         all_param = np.concatenate((all_param, p.data.numpy().flatten()))
 
     all_param = all_param.flatten()
-    np.save('../model/model_dnn.npy', all_param)
+    np.save('../model/mnist_dnn.npy', all_param)

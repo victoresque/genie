@@ -13,16 +13,23 @@ def train(T):
             x = x.view(x.size()[0], -1)
             return x
     model = nn.Sequential(
-        nn.Conv2d(1, 16, 3, bias=True),
+        nn.Conv2d(1, 16, 3, padding=1, bias=True),
+        nn.Conv2d(16, 16, 3, padding=1, bias=True),
+        nn.Conv2d(16, 16, 3, padding=1, bias=True),
         nn.ReLU(inplace=True),
         nn.MaxPool2d(2),
-        nn.Conv2d(16, 32, 3, bias=False),
+        nn.Conv2d(16, 32, 3, padding=1, bias=False),
+        nn.Conv2d(32, 32, 3, padding=1, bias=False),
+        nn.Conv2d(32, 32, 3, padding=1, bias=False),
         nn.ReLU(inplace=True),
         nn.MaxPool2d(2),
-        nn.Conv2d(32, 16, 3, bias=True),
+        nn.Conv2d(32, 64, 3, padding=1, bias=True),
+        nn.Conv2d(64, 64, 3, padding=1, bias=True),
+        nn.Conv2d(64, 64, 3, padding=1, bias=True),
         nn.ReLU(inplace=True),
+        nn.MaxPool2d(2),
         Flatten(),
-        nn.Linear(144, 10, bias=False),
+        nn.Linear(576, 10, bias=False),
     )
     optimizer = SGD(model.parameters(), lr=1e-1)
 
@@ -84,4 +91,4 @@ if __name__ == '__main__':
         all_param = np.concatenate((all_param, p.data.numpy().flatten()))
 
     all_param = all_param.flatten()
-    np.save('../model/model_cnn.npy', all_param)
+    np.save('../model/mnist_cnn.npy', all_param)

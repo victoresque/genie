@@ -21,9 +21,9 @@
 
 
 ## Convolutional Layer
-            [  31:27  |   26:16  |   15:5  |     4:0  ]
+            [  31:27  |   26:16  |   15:5  |  4:3  |     2:0  ]
 * Conv2d configuration
-    cfgcv   [     11  |     cin  |   cout  |  kernel  ]
+    cfgcv   [     11  |     cin  |   cout  |  pad  |  kernel  ]
 
 
             [  31:27  |  26 |      25:13  |       12:0  ]

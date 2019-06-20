@@ -6,11 +6,11 @@ from torchvision import datasets, transforms
 
 
 if __name__ == '__main__':
-    # data = datasets.MNIST(
-    #     '../data', train=True, download=True, transform=transforms.ToTensor())
-
-    data = datasets.CIFAR10(
+    data = datasets.MNIST(
         '../data', train=True, download=True, transform=transforms.ToTensor())
+
+    # data = datasets.CIFAR10(
+    #     '../data', train=True, download=True, transform=transforms.ToTensor())
 
     data_loader = torch.utils.data.DataLoader(
         data, batch_size=1, shuffle=True, num_workers=1)
